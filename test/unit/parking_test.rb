@@ -7,15 +7,15 @@ class ParkingTest < Test::Unit::TestCase
   end
   
   def test_parking_initializer
-    p = Parking.new(:address => ADDRESS, :heading => HEADING)
+    p = Parking.new(:address => ADDRESS, :heading => 'N')
     assert_equal ADDRESS, p.address
-    assert_equal HEADING, p.heading
+    assert_equal 'N', p.heading
   end
   
   def test_parking_as_json
     expected = {"left" => {"flag" => 'meter', "message" => 'until 8pm'}, 
                 "right" => {"flag" => 'ok'} }
-    assert_equal expected, Parking.new(:address => ADDRESS, :heading => HEADING).as_json
+    assert_equal expected, Parking.new(:address => ADDRESS, :heading => 'N').as_json
   end
   
   def test_resolve_direction
@@ -45,8 +45,24 @@ class ParkingTest < Test::Unit::TestCase
     assert_equal [15840, :right, seg], Parking.primo_summary(seg, 'N')
   end
   
-  def test_parking_parses_correctly_for_invalid_left
-    #flunk
+  def test_primo_summarize
+    expected = { :left => {:street=>"Ring Rd",
+       :meter=>false,
+       :limit=>nil,
+       :side=>"W",
+       :distance=>100,
+       :until=>{},
+       :section=>"Boylston St-Huntington Ave",
+       :bad_idea=>true}, 
+     :right => {:street=>"Ring Rd",
+       :meter=>false,
+       :limit=>nil,
+       :side=>"E",
+       :distance=>300,
+       :until=>{},
+       :section=>"Boylston St-Huntington Ave",
+       :bad_idea=>true} }
+    assert_equal expected, Parking.new(:address => ADDRESS, :heading => 'N').primo_summary
   end
   
   def test_parking_computes_correctly_for_valid_left_and_right

@@ -1,12 +1,27 @@
 class Parking
   DIRECTIONS = {'N' => 0, 'NE' => 45, 'E' => 90, 'SE' => 135, 'S' => 180, 'SW' => 225, 'W' => 270, 'NW' => 315}
-  attr_accessor :address, :heading
+  attr_accessor :address, :heading, :primo_response
   
   def initialize(attributes={})
     attributes.each do |attribute, value|
       self.send("#{attribute}=", value)
     end
     @primo_response = PrimoParking.results_for(address)
+  end
+  
+  def primo_summary
+    collection = @primo_response.collect {|pr| Parking.primo_summary(pr, self.heading)}
+    collection.reject! { |h| h[1].blank?} # remove any without direction
+    
+    # TODO: this can pick up streets that are parallel if they are listed as closest.
+    #  only include the street if the street name matches 
+    collection.inject({}) do |collector, item|
+      direction = item[1]
+      if collector[direction].blank? || collector[direction][:distance] > item[2][:distance]
+        collector[direction] = item[2]
+      end
+      collector
+    end
   end
   
   def as_json(options={})
@@ -20,7 +35,7 @@ class Parking
   def self.resolve_direction(heading, side)
     heading = DIRECTIONS[heading]
     side = DIRECTIONS[side]
-    
+    return nil if side.blank? || heading.blank?
     offset = (side - heading) % 360
     
     # offset is the left/right direction is preserved, but heading adjusted to be North
