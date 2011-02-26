@@ -18,20 +18,24 @@ function Heading(heading) {
 
 Heading.prototype.toString = function() {
   switch(this.direction) {
-    case 0: return "Null";
-    case 1: return "North";
-    case 2: return "North east";
-    case 3: return "East";
-    case 4: return "South east";
-    case 5: return "South";
-    case 6: return "South west";
-    case 7: return "West";
-    case 8: return "North west";
+    case Direction.NULL     : return "null";
+    case Direction.NORTH    : return "N";
+    case Direction.NORTHEAST: return "NE";
+    case Direction.EAST     : return "E";
+    case Direction.SOUTHEAST: return "SE";
+    case Direction.SOUTH    : return "S";
+    case Direction.SOUTHWEST: return "SW";
+    case Direction.WEST     : return "W";
+    case Direction.NORTHWEST: return "NW";
   }
 }
 
-/* http://www.movable-type.co.uk/scripts/latlong.html */
-function bearingFromPositions(position1, position2) {
+/* thanks http://www.movable-type.co.uk/scripts/latlong.html for the 
+ * maths.
+ *
+ * takes two positions and returns a new Heading object
+ */
+function headingFromPositions(position1, position2) {
   function toRad(deg) {
     var pi = Math.PI;
     return deg * (180/pi);
@@ -50,7 +54,7 @@ function bearingFromPositions(position1, position2) {
   var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
   var brng =  Math.atan2(y,x);
 
-  return (toDeg(brng) + 360) % 360;
+  return new Heading((toDeg(brng) + 360) % 360);
 }
 
 function directionFromBearing(heading) {
