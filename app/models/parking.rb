@@ -1,24 +1,19 @@
 class Parking
-  attr_accessor :lat, :lon, :heading
+  attr_accessor :address, :heading
   
   def initialize(attributes={})
     attributes.each do |attribute, value|
       self.send("#{attribute}=", value)
     end
+    @primo_response = PrimoParking.results_for(address)
   end
   
   def as_json(options={})
-    { "success" => true, 
-      "address" => '302 Newbury Street, Boston MA', 
-      "left" => left, 
+    { "left" => left, 
       "right" => right }
   end
   
-  #STUBS
-  def address
-    "302 Newbury Street, Boston MA"
-  end
-  
+  #STUBS  
   def left
     {"flag" => 'meter', "message" => 'until 8pm'}
   end
