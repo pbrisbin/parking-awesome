@@ -2,8 +2,8 @@
  * success(features), else call failure (optional).
  */
 function isSnowRoute(position, success, failure) {
-  var lng = position.coord.longitude;
-  var lat = position.coord.latitude;
+  var lng = position.coords.longitude;
+  var lat = position.coords.latitude;
 
   civicAPI('bos_snow_routes', lng, lat, function(data) {
     if (data.features.length) {
