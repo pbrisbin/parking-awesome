@@ -1,7 +1,7 @@
 var geocoder
 var map;
 
-function initialize() {
+function geocode_init() {
   geocoder = new google.maps.Geocoder();
   var latlng = new google.maps.LatLng(-34.397, 150.644);
   var myOptions = {
@@ -12,7 +12,8 @@ function initialize() {
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 }
 
-function getLatLng() {
+/* geocodes an address and returns lat/lng from gmaps */
+function getCoords() {
   var address = document.getElementById("address").value;
   geocoder.geocode( { 'address': address }, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
@@ -27,29 +28,20 @@ function getLatLng() {
   });
 }
 
-function reverseGeocode() {
-  var input = document.getElementById("latlng").value;
-  var latlngStr = input.split(",", 2);
+/* returns short_name from gmaps' geolocation based on a lat/lng */
+function getStreetByCoords(clat, clng, callback) {
+  /* optional parameters */
+  if (!clat && !clng) {
+    var input = document.getElementById("latlng").value;
+    var latlngStr = input.split(",", 2);
+  } else {
+    var latlngStr = [ clat, clng ];
+  }
+
   var lat = parseFloat(latlngStr[0]);
   var lng = parseFloat(latlngStr[1]);
   var latlng = new google.maps.LatLng(lat, lng);
 
-
-  geocoder.geocode( { 'latLng': latlng }, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      var a = results[0].address_components;
-      for (i = 0; i < a.length; i++) {
-        for (j = 0; j < a[i].types.length; j++) {
-          if (a[i].types[j] == "route") {
-            alert(a[i].short_name); /* success */
-            return;
-          }
-        }
-      }
-      alert("[no results]");
-    } else {
-      alert("[geocoding error]");
-    }
-  });
+  geocoder.geocode( { 'latLng': latlng }, callback);
 }
 
