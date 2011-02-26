@@ -3,6 +3,12 @@ SideOfVehicle = {
   Right: 1
 }
 
+/* usage:
+ *
+ * var v = new Vehicle(position);
+ * print(v.toString());
+ *
+ */
 function Vehicle(position) {
   this.longitude = position.coords.longitude;
   this.latitude  = position.coords.latitude;
@@ -18,6 +24,14 @@ Vehicle.prototype.toString = function() {
     + (this.evens == SideOfVehicle.Left ? "left" : "right");
 }
 
+/* usage:
+ *
+ * var v = new Vehicle(position);
+ * var p = someOtherPosition;
+ *
+ * var side = v.sideOfVehicle(p); // returns SideOfVehicle.Left or .Right
+ *
+ */
 Vehicle.prototype.sideOfVehicle = function(position) {
   var adjustedDirection = null; 
   var diffLong = this.longitude - position.coords.longitude;
@@ -31,7 +45,7 @@ Vehicle.prototype.sideOfVehicle = function(position) {
 
   switch(this.heading.direction) {
     /* fall back is just a guess */
-    case Direction.NULL:  return SideOfVehicle.Left;
+    case Direction.NULL:  return SideOfVehicle.Right;
 
     /* leave these as-is */
     case Direction.NORTH:
@@ -67,6 +81,7 @@ Vehicle.prototype.sideOfVehicle = function(position) {
   }
 }
 
+/* used when initializing a new Vehicle() */
 Vehicle.prototype.setOddEvens = function() {
   /* set odds */
   var odd = findOddAddress(this);
@@ -76,18 +91,24 @@ Vehicle.prototype.setOddEvens = function() {
   }
   else {
     /* guess is fallback ;O */
-    this.odds = SideOfVehicle.Left;
+    this.odds = SideOfVehicle.Right;
   }
 
   /* evens are whatever odds are not */
-  this.evens = this.odds != SideOfVehicle.Left 
-             ? SideOfVehicle.Left 
-             : SideOfVehicle.Right;
+  this.evens = this.odds != SideOfVehicle.Left ? SideOfVehicle.Left : SideOfVehicle.Right;
 }
 
-/* take a vehicle (with position), find the neares odd address and 
- * return a position object for it or null */
 function findOddAddress(vehicle) {
   // todo:
   return null;
+}
+
+function getStreetNum(id) {
+  civicMeta("bos_addresses", id, function(data) {
+    if (data.error) {
+      alert(data.error);
+    } else {
+      alert(data.full_address);
+    }
+  });
 }
