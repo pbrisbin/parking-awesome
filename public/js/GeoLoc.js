@@ -1,6 +1,6 @@
 /* A better heading representation for our purposes */
-Heading.Direction = {
-  NULL      : 0 // no heading info
+Direction = {
+  NULL      : 0, // no heading info
   NORTH     : 1,
   NORTHEAST : 2,
   EAST      : 3,
@@ -11,8 +11,17 @@ Heading.Direction = {
   NORTHWEST : 8
 }
 
+/* http://www.movable-type.co.uk/scripts/latlong.html */
 function bearingFromPositions(position1, position2) {
-  // todo:
+  var lat1 = position1.coord.latitude.toRad();
+  var lat2 = position2.coord.latitude.toRad();
+  var dLon = (position2.coord.longitude - position1.coord.longitude).toRad();
+
+  var y = Math.sin(dLon) * Math.cos(lat2);
+  var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+  var brng =  Math.atan2(y,x);
+
+  return (brng.toDeg() + 360) % 360;
 }
 
 function directionFromBearing(heading) {
@@ -27,20 +36,20 @@ function directionFromBearing(heading) {
   }
 
   /* null case, feature unsupported */
-  if (heading == null) return Heading.Direction.NULL
+  if (heading == null) return Direction.NULL
 
   /* 0 <= heading < 359 where 0 == True North */
-  if (near(heading, 0))  return Heading.Direction.NORTH;
-  if (near(heading, 45)) return Heading.Direction.NORTHEAST;
-  if (near(heading, 90)) return Heading.Direction.EAST;
-  if (near(heading, 135)) return Heading.Direction.SOUTHEAST;
-  if (near(heading, 180)) return Heading.Direction.SOUTH;
-  if (near(heading, 225)) return Heading.Direction.SOUTHWEST;
-  if (near(heading, 270)) return Heading.Direciton.WEST;
-  if (near(heading, 315)) return Heading.Direction.NORTHWEST;
+  if (near(heading, 0))  return Direction.NORTH;
+  if (near(heading, 45)) return Direction.NORTHEAST;
+  if (near(heading, 90)) return Direction.EAST;
+  if (near(heading, 135)) return Direction.SOUTHEAST;
+  if (near(heading, 180)) return Direction.SOUTH;
+  if (near(heading, 225)) return Direction.SOUTHWEST;
+  if (near(heading, 270)) return Direciton.WEST;
+  if (near(heading, 315)) return Direction.NORTHWEST;
 
   /* impossible, but oh well */
-  return Heading.Direciton.NULL;
+  return Direciton.NULL;
 }
 
 /* get location data. call success(position) on OK, error on error, and 
