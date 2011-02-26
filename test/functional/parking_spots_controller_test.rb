@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class ParkingSpotsControllerTest < ActionController::TestCase
-  LAT = 42.348672
-  LON = -71.085019
-  HEADING = 90.34 #east
   def test_index_success
     get :index, :lat => LAT, :lon => LON, :heading => HEADING,:format => :json
     assert_response :success

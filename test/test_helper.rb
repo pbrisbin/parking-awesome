@@ -2,8 +2,12 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 FakeWeb.allow_net_connect = false
+LAT = 42.348672
+LON = -71.085019
+HEADING = 90.34 #east
 
 class ActiveSupport::TestCase
+  
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
