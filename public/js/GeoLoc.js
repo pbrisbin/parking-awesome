@@ -35,17 +35,54 @@ Heading.prototype.toString = function() {
  *
  * takes two positions and returns a new Heading object
  */
+function toRad(deg) {
+  var pi = Math.PI;
+  return deg * (180/pi);
+}
+
+function toDeg(rad) {
+  var pi = Math.PI;
+  return rad * (pi/180);
+}
+
+function getDistance(position1, position2) {
+  var precision = 4;
+  var R = 6371; // earth's radius
+
+  var lat1 = toRad(position1.coords.latitude);
+  var lon1 = toRad(position1.coords.longitude);
+  var lat2 = toRad(position2.coords.latitude);
+  var lon2 = toRad(position2.coords.longitude);
+
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(lat1) * Math.cos(lat2) * 
+          Math.sin(dLon/2) * Math.sin(dLon/2);
+
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c;
+
+  return d.toPrecisionFixed(precision);
+}
+
+function closestPosition(position, positions) {
+  var p, d;
+  var min = null;
+  var closest;
+
+  for (i in positions) {
+    p = positions[i];
+    d = getDistance(position, p);
+
+    if (!min || d < min) {
+      min     = d;
+      closest = p;
+    }
+  }
+
+  return closest;
+}
+
 function headingFromPositions(position1, position2) {
-  function toRad(deg) {
-    var pi = Math.PI;
-    return deg * (180/pi);
-  }
-
-  function toDeg(rad) {
-    var pi = Math.PI;
-    return rad * (pi/180);
-  }
-
   var lat1 = toRad(position1.coords.latitude);
   var lat2 = toRad(position2.coords.latitude);
   var dLon = toRad(position2.coords.longitude - position1.coords.longitude);
