@@ -12,8 +12,18 @@ function initialize() {
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 }
 
+/* gets a position object from the browser (html5). 
+ *
+ * position is passed as a param to the callback and * has (among other things):
+ *    .coords.latitude
+ *    .coords.longitude
+ */
+function getPosFromBrowser(callback) {
+  navigator.geolocation.getCurrentPosition(callback);
+}
+
 /* geocodes an address and returns lat/lng from gmaps */
-function getLatLng() {
+function getCoords() {
   var address = document.getElementById("address").value;
   geocoder.geocode( { 'address': address }, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
@@ -29,7 +39,7 @@ function getLatLng() {
 }
 
 /* returns short_name from gmaps' geolocation based on a lat/lng */
-function findStreetByCoords(clat, clng) {
+function getStreetByCoords(clat, clng) {
   /* optional parameters */
   if (!clat && !clng) {
     var input = document.getElementById("latlng").value;
