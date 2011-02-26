@@ -13,7 +13,10 @@ class Parking
     { "left" => left, 
       "right" => right }
   end
-    
+  
+  def self.primo_summary(segment, heading)
+    [segment[:distance], Parking.resolve_direction(heading, segment[:side]), segment]
+  end  
   def self.resolve_direction(heading, side)
     heading = DIRECTIONS[heading]
     side = DIRECTIONS[side]

@@ -37,12 +37,12 @@ class ParkingTest < Test::Unit::TestCase
   end
   
   
-  def test_parking_computes_correctly_for_valid_left
+  def test_primo_summary
     seg = segment('W', false)
-  #  assert_equal [15840, :left, seg], Parking.primo_message(seg, 'N')
+    assert_equal [15840, :left, seg], Parking.primo_summary(seg, 'N')
 
     seg = segment('E', false)
-   # assert_equal [15840, :right, seg], Parking.primo_message(seg, 'N')
+    assert_equal [15840, :right, seg], Parking.primo_summary(seg, 'N')
   end
   
   def test_parking_parses_correctly_for_invalid_left
@@ -59,7 +59,7 @@ class ParkingTest < Test::Unit::TestCase
   
   private
   
-  def segment(side, meter, distance="3 miles", section = "Alewife - Newbury", limit='4 days')
+  def segment(side, meter, distance=15840, section = "Alewife - Newbury", limit='4 days')
   { :limit=>limit,
     :meter=>meter,
     :side=>side,
