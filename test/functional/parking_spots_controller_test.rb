@@ -8,13 +8,9 @@ class ParkingSpotsControllerTest < ActionController::TestCase
     get :index, :address => ADDRESS, :heading => 'N',:format => :json
     assert_response :success
 
-    # Left North:
-    # Right South:
-
-    expected = {"left" => {"flag" => 'meter', "message" => 'until 8pm'}, "right" => {"flag" => 'ok'}}
+    expected = {"left"=>{'flag'=>"no", 'message'=>"bad idea"},
+     "right"=>{'flag'=>"no", 'message'=>"bad idea"}}
     
     assert_equal expected, ActiveSupport::JSON.decode(@response.body)
   end
-
-  
 end

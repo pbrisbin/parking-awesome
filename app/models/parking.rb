@@ -27,21 +27,21 @@ class Parking
     offset > 180 ? :left : :right
   end
   
-  #STUBS  
   def left
-    {"flag" => 'meter', "message" => 'until 8pm'}
+    PrimoParking.parse_descriptor(primo_summary[:left])
   end
   
   def right
-   {"flag" => 'ok'}
+   PrimoParking.parse_descriptor(primo_summary[:right])
   end
   
   # Integrate Parking Heading Information with Primo Summary
   
   def primo_summary
+    return @primo_summary if @primo_summary
     collection = @primo_response.collect {|pr| Parking.primo_summary(pr, self.heading)}
     collection.reject! { |h| h[1].blank?} # remove any without direction
-    collection.inject({}) do |collector, item|
+    @primo_summary = collection.inject({}) do |collector, item|
       direction = item[1]
       if collector[direction].blank? || collector[direction][:distance] > item[2][:distance]
         collector[direction] = item[2] if item[2][:street].match(geocoded_street_regex)

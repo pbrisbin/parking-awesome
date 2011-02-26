@@ -13,8 +13,8 @@ class ParkingTest < Test::Unit::TestCase
   end
   
   def test_parking_as_json
-    expected = {"left" => {"flag" => 'meter', "message" => 'until 8pm'}, 
-                "right" => {"flag" => 'ok'} }
+    expected = {"left"=>{:flag=>"no", :message=>"bad idea"},
+     "right"=>{:flag=>"no", :message=>"bad idea"}}
     assert_equal expected, Parking.new(:address => ADDRESS, :heading => 'N').as_json
   end
   
@@ -65,14 +65,13 @@ class ParkingTest < Test::Unit::TestCase
     assert_equal expected, Parking.new(:address => ADDRESS, :heading => 'N').primo_summary
   end
   
-  def test_parking_computes_correctly_for_valid_left_and_right
-    #flunk
+  def test_left_and_right
+    p = Parking.new(:address => ADDRESS, :heading => 'N')
+    bad_idea = {:flag => 'no', :message => 'bad idea'}
+    assert_equal bad_idea, p.left
+    assert_equal bad_idea, p.right
   end
-  
-  def test_parking_computes_correctly_for_multiple_matches
-    #flunk
-  end
-  
+      
   private
   
   def segment(side, meter, distance=15840, section = "Alewife - Newbury", limit='4 days')
