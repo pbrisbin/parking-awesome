@@ -2,6 +2,26 @@ require 'test_helper'
 require 'fakeweb'
 
 class PrimoParkingTest < Test::Unit::TestCase
+  
+  def setup
+    FakeWeb.register_uri :get, "http://primospot.com/m/results?address=Huntington%20Ave,%20Boston&commit=Search",
+      :body => File.open('test/fixtures/primo_huntington.html').read
+    FakeWeb.register_uri :get, "http://primospot.com/m/results?address=Huntington+Ave%2C+Boston&commit=Search&page=2",
+      :body => File.open('test/fixtures/primo_huntington_page2.html').read
+    FakeWeb.register_uri :get, "http://primospot.com/m/results?address=Huntington+Ave%2C+Boston&commit=Search&page=3",
+      :body => File.open('test/fixtures/primo_huntington_page3.html').read
+  end
+  def test_all_pages_for
+    pages = ["http://primospot.com/m/results?address=Huntington%20Ave,%20Boston&commit=Search",
+      "http://primospot.com/m/results?address=Huntington+Ave%2C+Boston&commit=Search&page=2",
+      "http://primospot.com/m/results?address=Huntington+Ave%2C+Boston&commit=Search&page=3"]
+    
+    expected = pages.inject({}) do |collector, item|
+      collector.merge!({item => HTTParty.get(item)})
+    end
+    assert_equal expected, PrimoParking.pages_for('Huntington Ave, Boston')
+  end
+  
   def test_parse_link
     expected = {:side => 'W', :street => 'Exeter St', :section => 'Boylston St-Huntington Ave'}
     assert_equal expected, PrimoParking.parse_link("W side Exeter St betw. (Boylston St-Huntington Ave)")
@@ -12,8 +32,6 @@ class PrimoParkingTest < Test::Unit::TestCase
   end
   
   def test_scrape
-    FakeWeb.register_uri :get, "http://primospot.com/m/results?address=Huntington%20Ave,%20Boston&commit=Search",
-      :body => File.open('test/fixtures/primo_huntington.html').read
     
     expected = { :limit=>"4 days",
         :meter=>false,
@@ -86,6 +104,184 @@ class PrimoParkingTest < Test::Unit::TestCase
         :street=>"Exeter St",
         :section=>"Boylston St-Huntington Ave"}
         
-      assert_equal expected, PrimoParking.scrape('Huntington Ave, Boston')
+      assert_equal expected, PrimoParking.scrape(HTTParty.get("http://primospot.com/m/results?address=Huntington%20Ave,%20Boston&commit=Search"))
+      
+  end
+  
+  def test_results_for
+    expected = [{:side=>"SE",
+      :street=>"Huntington Ave",
+      :meter=>false,
+      :limit=>"4 days",
+      :section=>"Mass Ave-Harcourt St",
+      :until=>"Thu&nbsp;12:00am",
+      :distance=>"0.2 miles"},
+     {:side=>"SE",
+      :street=>"Boylston St",
+      :meter=>false,
+      :limit=>"14h 55m",
+      :section=>"Ring Rd-Exeter St",
+      :until=>"Sun&nbsp;2:00am",
+      :distance=>"900 feet"},
+     {:side=>"E",
+      :street=>"Fairfield St",
+      :meter=>true,
+      :limit=>"2 hours",
+      :section=>"Newbury St-Boylston St",
+      :until=>"1:05pm",
+      :distance=>"0.2 miles"},
+     {:side=>"NW",
+      :street=>"Boylston St",
+      :meter=>true,
+      :limit=>"2 hours",
+      :section=>"Ring Rd-Exeter St",
+      :until=>"1:05pm",
+      :distance=>"0.2 miles"},
+     {:side=>"W",
+      :street=>"Exeter St",
+      :meter=>true,
+      :limit=>"2 hours",
+      :section=>"Newbury St-Boylston St",
+      :until=>"1:05pm",
+      :distance=>"0.3 miles"},
+     {:side=>"N",
+      :street=>"Boylston St",
+      :meter=>true,
+      :limit=>"2 hours",
+      :section=>"Gloucester St-Fairfield St",
+      :until=>"1:05pm",
+      :distance=>"0.3 miles"},
+     {:side=>"N",
+      :street=>"Huntington Ave",
+      :meter=>true,
+      :limit=>"2 hours",
+      :section=>"Exeter St-Dartmouth St",
+      :until=>"1:05pm",
+      :distance=>"0.3 miles"},
+     {:side=>"NW",
+      :street=>"St Botolph St",
+      :meter=>true,
+      :limit=>"2 hours",
+      :section=>"Garrison St-Harcourt St",
+      :until=>"1:05pm",
+      :distance=>"0.3 miles"},
+     {:side=>"W",
+      :street=>"Fairfield St",
+      :meter=>true,
+      :limit=>"2 hours",
+      :section=>"Newbury St-Boylston St",
+      :until=>"1:05pm",
+      :distance=>"0.2 miles"},
+     {:side=>"W",
+      :street=>"Exeter St",
+      :meter=>true,
+      :limit=>"2 hours",
+      :section=>"Boylston St-Huntington Ave",
+      :until=>"1:05pm",
+      :distance=>"800 feet"},
+     {:side=>"NW",
+      :street=>"Boylston St",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Fairfield St-Ring Rd",
+      :until=>{},
+      :distance=>"0.2 miles"},
+     {:side=>"SE",
+      :street=>"Huntington Ave",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Mass Ave-Harcourt St",
+      :until=>{},
+      :distance=>"900 feet",
+      :bad_idea=>true},
+     {:side=>"S",
+      :street=>"Boylston St",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Gloucester St-Fairfield St",
+      :until=>{},
+      :distance=>"0.2 miles",
+      :bad_idea=>true},
+     {:side=>"NW",
+      :street=>"Boylston St",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Fairfield St-Ring Rd",
+      :until=>{},
+      :distance=>"0.2 miles",
+      :bad_idea=>true},
+     {:side=>"copy of SE",
+      :street=>"St Botolph St",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Follen St-Garrison St",
+      :until=>{},
+      :distance=>"0.3 miles",
+      :bad_idea=>true},
+     {:side=>"W",
+      :street=>"Ring Rd",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Boylston St-Huntington Ave",
+      :until=>{},
+      :distance=>"100 feet",
+      :bad_idea=>true},
+     {:side=>"SE",
+      :street=>"Huntington Ave",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Harcourt St-Garrison St",
+      :until=>{},
+      :distance=>"0.2 miles",
+      :bad_idea=>true},
+     {:side=>"NW",
+      :street=>"Huntington Ave",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Mass Ave-Harcourt St",
+      :until=>{},
+      :distance=>"700 feet",
+      :bad_idea=>true},
+     {:side=>"SE",
+      :street=>"Boylston St",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Fairfield St-Ring Rd",
+      :until=>{},
+      :distance=>"800 feet",
+      :bad_idea=>true},
+     {:side=>"E",
+      :street=>"Ring Rd",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Boylston St-Huntington Ave",
+      :until=>{},
+      :distance=>"300 feet",
+      :bad_idea=>true},
+     {:side=>"NW",
+      :street=>"Huntington Ave",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Garrison St-W Newton St",
+      :until=>{},
+      :distance=>"0.3 miles",
+      :bad_idea=>true},
+     {:side=>"NW",
+      :street=>"Huntington Ave",
+      :meter=>false,
+      :limit=>nil,
+      :section=>"Harcourt St-Garrison St",
+      :until=>{},
+      :distance=>"700 feet",
+      :bad_idea=>true}]
+    
+    assert_equal expected, PrimoParking.results_for('Huntington Ave, Boston')
+    
+  end
+  def test_bad_idea
+    response = HTTParty.get("http://primospot.com/m/results?address=Huntington+Ave%2C+Boston&commit=Search&page=2")
+    results = PrimoParking.scrape(response)
+    assert results.first[:bad_idea].blank?
+    assert ! results[1][:bad_idea].blank?
   end
 end
