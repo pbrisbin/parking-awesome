@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'boston-street-scraper'
 gem 'rails', '3.0.0'
 
 # Bundle edge Rails instead:
@@ -27,4 +28,5 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # and rake tasks are available in development mode:
 # group :development, :test do
 #   gem 'webrat'
+	gem 'fakeweb'
 # end
