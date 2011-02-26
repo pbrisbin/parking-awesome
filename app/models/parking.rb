@@ -9,29 +9,12 @@ class Parking
     @primo_response = PrimoParking.results_for(address)
   end
   
-  def primo_summary
-    collection = @primo_response.collect {|pr| Parking.primo_summary(pr, self.heading)}
-    collection.reject! { |h| h[1].blank?} # remove any without direction
-    
-    # TODO: this can pick up streets that are parallel if they are listed as closest.
-    #  only include the street if the street name matches 
-    collection.inject({}) do |collector, item|
-      direction = item[1]
-      if collector[direction].blank? || collector[direction][:distance] > item[2][:distance]
-        collector[direction] = item[2] if item[2][:street].match(geocoded_street_regex)
-      end
-      collector
-    end
-  end
   
   def as_json(options={})
     { "left" => left, 
       "right" => right }
   end
   
-  def self.primo_summary(segment, heading)
-    [segment[:distance], Parking.resolve_direction(heading, segment[:side]), segment]
-  end  
   def self.resolve_direction(heading, side)
     heading = DIRECTIONS[heading]
     side = DIRECTIONS[side]
@@ -44,7 +27,6 @@ class Parking
     offset > 180 ? :left : :right
   end
   
-  
   #STUBS  
   def left
     {"flag" => 'meter', "message" => 'until 8pm'}
@@ -54,9 +36,27 @@ class Parking
    {"flag" => 'ok'}
   end
   
+  # Integrate Parking Heading Information with Primo Summary
+  def primo_summary
+    collection = @primo_response.collect {|pr| Parking.primo_summary(pr, self.heading)}
+    collection.reject! { |h| h[1].blank?} # remove any without direction
+    collection.inject({}) do |collector, item|
+      direction = item[1]
+      if collector[direction].blank? || collector[direction][:distance] > item[2][:distance]
+        collector[direction] = item[2] if item[2][:street].match(geocoded_street_regex)
+      end
+      collector
+    end
+  end
+  
+  def self.primo_summary(segment, heading)
+    [segment[:distance], Parking.resolve_direction(heading, segment[:side]), segment]
+  end  
+
   private 
+  # Helper methods to integrate with Geocoder
   def geocoded_address
-    Geocoder.search("Newbury Street, Boston, MA")
+    Geocoder.search(self.address)
   end
   
   def geocoded_street
@@ -64,6 +64,6 @@ class Parking
   end
   
   def geocoded_street_regex
-    Regexp.compile((geocoded_street.gsub(/st|ave|street|avenue/, '').strip rescue ''))
+    Regexp.compile((geocoded_street.strip.gsub(/st\Z|ave\Z|street\Z|avenue\Z/i, '').strip rescue ''))
   end
 end
