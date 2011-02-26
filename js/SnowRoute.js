@@ -3,15 +3,12 @@
  */
 function mkBbox(_long, _lat) {
   // todo: define a range or make a zero-volume box?
-  var longMin = _long - 0.001;
-  var longMax = _long + 0.001;
-  var latMin  = _lat  - 0.001;
-  var latMax  = _lat  + 0.001;
+  var longMin = _long;
+  var longMax = _long;
+  var latMin  = _lat;
+  var latMax  = _lat;
 
-  return longMax
-    + ',' + latMin
-    + ',' + longMin
-    + ',' + latMax;
+  return longMax + ',' + latMin + ',' + longMin + ',' + latMax;
 }
 
 /* make the dataset request to see if the given long/lat is on a snow 
