@@ -21,8 +21,15 @@
           "heading": heading
         },
         success: function(result) {
-          /* update css */
-          alert("success!");
+          $("#lefticon").addClass(result.left.icon);
+          $("#righticon").addClass(result.right.icon);
+          $("#streetsign").addClass(result.streetname)
+
+          if (result.left.message) {
+            $("#sidearrow").text(result.left.message);
+          } else if (result.right.message) {
+            $("#sidearrow").text(result.right.message);
+          }
         },
         failure: function(result) {
           alert("aww, snap!");
