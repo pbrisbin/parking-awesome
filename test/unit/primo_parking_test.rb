@@ -32,6 +32,45 @@ class PrimoParkingTest < Test::Unit::TestCase
     assert_equal nil, PrimoParking.normalize_distance('ajkshasjkhd')
   end
   
+  def test_parse_primo_into_descriptor_ok
+    expected = {:flag => 'ok'}
+    assert_equal expected, PrimoParking.parse_descriptor({:until=>"Thu&nbsp;12:00am",
+      :section=>"Mass Ave-Harcourt St",
+      :meter=>false,
+      :street=>"Huntington Ave",
+      :limit=>"4 days",
+      :distance=>1056.0,
+      :side=>"SE"})
+  end
+  
+  def test_parse_primo_into_descriptor_meter
+    expected = {:flag => 'meter', :message => 'until Thu&nbsp;12:00am'}
+    assert_equal expected, PrimoParking.parse_descriptor({:until=>"Thu&nbsp;12:00am",
+      :section=>"Mass Ave-Harcourt St",
+      :meter=>true,
+      :street=>"Huntington Ave",
+      :limit=>"4 days",
+      :distance=>1056.0,
+      :side=>"SE"})    
+  end
+  
+  def test_parse_primo_into_descriptor_bad_idea
+    expected = {:flag => 'no', :message => 'bad idea'}
+    assert_equal expected, PrimoParking.parse_descriptor({:until=>"Thu&nbsp;12:00am",
+      :section=>"Mass Ave-Harcourt St",
+      :bad_idea => true,
+      :meter=>false,
+      :street=>"Huntington Ave",
+      :limit=>"4 days",
+      :distance=>1056.0,
+      :side=>"SE"})
+  end
+  
+  def test_parse_primo_into_descriptor_nil
+    expected = {:flag => 'ok'}
+    assert_equal expected, PrimoParking.parse_descriptor(nil)
+  end
+  
   def test_scrape
     
     expected = {:until=>"Thu&nbsp;12:00am",

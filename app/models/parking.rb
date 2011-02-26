@@ -37,6 +37,7 @@ class Parking
   end
   
   # Integrate Parking Heading Information with Primo Summary
+  
   def primo_summary
     collection = @primo_response.collect {|pr| Parking.primo_summary(pr, self.heading)}
     collection.reject! { |h| h[1].blank?} # remove any without direction

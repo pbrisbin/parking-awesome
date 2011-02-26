@@ -43,6 +43,14 @@ class PrimoParking
     end
   end
   
+  def self.parse_descriptor(attributes)
+    ok = {:flag => 'ok'}
+    return ok if attributes.blank?
+    return {:flag => 'meter', :message => "until #{attributes[:until]}"} if attributes[:meter]
+    return {:flag => 'no', :message => 'bad idea'} if attributes[:bad_idea]
+    ok
+  end
+  
   def self.parse_link(link)
     match = link.match(/(.*?) side (.*?) betw\. \((.*?)\)/)
     {:side => match[1], :street => match[2], :section => match[3]} rescue {}
