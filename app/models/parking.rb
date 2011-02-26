@@ -1,6 +1,6 @@
 class Parking
   DIRECTIONS = {'N' => 0, 'NE' => 45, 'E' => 90, 'SE' => 135, 'S' => 180, 'SW' => 225, 'W' => 270, 'NW' => 315}
-  attr_accessor :address, :heading, :primo_response,
+  attr_accessor :address, :heading, :primo_response
   
   def initialize(attributes={})
     attributes.each do |attribute, value|
