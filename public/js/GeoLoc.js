@@ -18,7 +18,12 @@ function bearingFromPositions(position1, position2) {
 function directionFromBearing(heading) {
   /* a helper */
   function near(heading, degree) {
-    // todo:
+    var delta = 45 / 2;
+
+    if (degree == 0) // special case
+      return (heading <= degree + delta || heading > 360 - delta)
+
+    return (heading <= degree + delta && heading > degree - delta)
   }
 
   /* null case, feature unsupported */
