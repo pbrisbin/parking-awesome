@@ -5,7 +5,7 @@ class ParkingSpotsControllerTest < ActionController::TestCase
     setup_primo_fakeweb
   end
   def test_index_success
-    get :index, :address => ADDRESS, :heading => HEADING,:format => :json
+    get :index, :address => ADDRESS, :heading => 'N',:format => :json
     assert_response :success
 
     # Left North:
