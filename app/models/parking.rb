@@ -18,7 +18,7 @@ class Parking
     collection.inject({}) do |collector, item|
       direction = item[1]
       if collector[direction].blank? || collector[direction][:distance] > item[2][:distance]
-        collector[direction] = item[2]
+        collector[direction] = item[2] if item[2][:street].match(geocoded_street_regex)
       end
       collector
     end
@@ -52,5 +52,18 @@ class Parking
   
   def right
    {"flag" => 'ok'}
+  end
+  
+  private 
+  def geocoded_address
+    Geocoder.search("Newbury Street, Boston, MA")
+  end
+  
+  def geocoded_street
+    geocoded_address.first.data['address_components'].first['short_name'] rescue nil
+  end
+  
+  def geocoded_street_regex
+    Regexp.compile((geocoded_street.gsub(/st|ave|street|avenue/, '').strip rescue ''))
   end
 end
