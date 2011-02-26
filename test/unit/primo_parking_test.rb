@@ -2,15 +2,10 @@ require 'test_helper'
 require 'fakeweb'
 
 class PrimoParkingTest < Test::Unit::TestCase
-  
   def setup
-    FakeWeb.register_uri :get, "http://primospot.com/m/results?address=Huntington%20Ave,%20Boston&commit=Search",
-      :body => File.open('test/fixtures/primo_huntington.html').read
-    FakeWeb.register_uri :get, "http://primospot.com/m/results?address=Huntington+Ave%2C+Boston&commit=Search&page=2",
-      :body => File.open('test/fixtures/primo_huntington_page2.html').read
-    FakeWeb.register_uri :get, "http://primospot.com/m/results?address=Huntington+Ave%2C+Boston&commit=Search&page=3",
-      :body => File.open('test/fixtures/primo_huntington_page3.html').read
+    setup_primo_fakeweb
   end
+  
   def test_all_pages_for
     pages = ["http://primospot.com/m/results?address=Huntington%20Ave,%20Boston&commit=Search",
       "http://primospot.com/m/results?address=Huntington+Ave%2C+Boston&commit=Search&page=2",
