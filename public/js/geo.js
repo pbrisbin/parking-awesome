@@ -12,6 +12,7 @@ function initialize() {
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 }
 
+/* geocodes an address and returns lat/lng from gmaps */
 function getLatLng() {
   var address = document.getElementById("address").value;
   geocoder.geocode( { 'address': address }, function(results, status) {
@@ -27,13 +28,19 @@ function getLatLng() {
   });
 }
 
-function reverseGeocode() {
-  var input = document.getElementById("latlng").value;
-  var latlngStr = input.split(",", 2);
+/* returns short_name from gmaps' geolocation based on a lat/lng */
+function findStreetByCoords(clat, clng) {
+  /* optional parameters */
+  if (!clat && !clng) {
+    var input = document.getElementById("latlng").value;
+    var latlngStr = input.split(",", 2);
+  } else {
+    var latlngStr = [ clat, clng ];
+  }
+
   var lat = parseFloat(latlngStr[0]);
   var lng = parseFloat(latlngStr[1]);
   var latlng = new google.maps.LatLng(lat, lng);
-
 
   geocoder.geocode( { 'latLng': latlng }, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
