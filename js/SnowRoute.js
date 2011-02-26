@@ -1,16 +1,24 @@
 /* take a longitute and latitue and make a 'bbox' argument for the json 
- * request which boxes that point. todo: define a range or make a 
- * zero-volume box?
+ * request which boxes that point
  */
 function mkBbox(_long, _lat) {
-  // todo:
+  // todo: define a range or make a zero-volume box?
+  var longMin = _long - 0.001;
+  var longMax = _long + 0.001;
+  var latMin  = _lat  - 0.001;
+  var latMax  = _lat  + 0.001;
+
+  return longMax
+    + ',' + latMin
+    + ',' + longMin
+    + ',' + latMax;
 }
 
 /* make the dataset request to see if the given long/lat is on a snow 
  * route or not; returns true/false
  */
 function isSnowRoute(_long, _lat) {
-  var dataset = 'boston_snow_route';
+  var dataset = 'boston_snow_routes';
   var bbox    = mkBbox(_long, _lat);
 
   $.ajax({
@@ -21,7 +29,7 @@ function isSnowRoute(_long, _lat) {
       },
       success: function(o) {
         features = o.features;
-        if (o.features.length()) {
+        if (o.features.length) {
           return true;
         }
       }
