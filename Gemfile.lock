@@ -80,5 +80,7 @@ PLATFORMS
 DEPENDENCIES
   boston-street-scraper
   fakeweb
+  httparty
+  nokogiri
   rails (= 3.0.0)
   sqlite3-ruby
