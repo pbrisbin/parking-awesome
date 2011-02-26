@@ -1,5 +1,5 @@
 /* look for snow route features at the given point; if features, call 
- * success(features), else call failure.
+ * success(features), else call failure (optional).
  */
 function isSnowRoute(lng, lat, success, failure) {
   civicAPI('bos_snow_routes', lng, lat, function(data) {
@@ -7,6 +7,9 @@ function isSnowRoute(lng, lat, success, failure) {
       success(data.features);
     }
     else {
+      // just return if user doesn't pass a fail callback
+      if (typeof(failure) == 'undefined') return;
+
       failure;
     }
   });
