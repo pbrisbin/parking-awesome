@@ -1,15 +1,8 @@
-/* generic wrapper for using the civic api
- *
- * arguments:
- *
- *   data set name
- *   longitude
- *   latitude
- *   callback(data)
- *
- */
+/* generic wrappers for using the civic api */
+
+var url  = "http://civicapi.com/";
+
 function civicAPI(dataset, lng, lat, callback) {
-  var url  = "http://civicapi.com/";
   var bbox = lng + ',' + lat + ',' + lng + ',' + lat; // todo: zero-volume box
 
   $.ajax({
@@ -18,4 +11,12 @@ function civicAPI(dataset, lng, lat, callback) {
       data:     { "bbox": bbox },
       success:  callback
   });
+}
+
+function civicMeta(dataset, id, callback) {
+    $.ajax({
+        url:      url + dataset + "/" + id,
+        dataType: "jsonp",
+        success:  callback
+    });
 }
