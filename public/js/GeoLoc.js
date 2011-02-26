@@ -11,17 +11,46 @@ Direction = {
   NORTHWEST : 8
 }
 
+function Heading(heading) {
+  this.heading   = heading;
+  this.direction = directionFromBearing(this.heading);
+}
+
+Heading.prototype.toString = function() {
+  switch(this.direction) {
+    case 0: return "Null";
+    case 1: return "North";
+    case 2: return "North east";
+    case 3: return "East";
+    case 4: return "South east";
+    case 5: return "South";
+    case 6: return "South west";
+    case 7: return "West";
+    case 8: return "North west";
+  }
+}
+
 /* http://www.movable-type.co.uk/scripts/latlong.html */
 function bearingFromPositions(position1, position2) {
-  var lat1 = position1.coord.latitude.toRad();
-  var lat2 = position2.coord.latitude.toRad();
-  var dLon = (position2.coord.longitude - position1.coord.longitude).toRad();
+  function toRad(deg) {
+    var pi = Math.PI;
+    return deg * (180/pi);
+  }
+
+  function toDeg(rad) {
+    var pi = Math.PI;
+    return rad * (pi/180);
+  }
+
+  var lat1 = toRad(position1.coords.latitude);
+  var lat2 = toRad(position2.coords.latitude);
+  var dLon = toRad(position2.coords.longitude - position1.coords.longitude);
 
   var y = Math.sin(dLon) * Math.cos(lat2);
   var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
   var brng =  Math.atan2(y,x);
 
-  return (brng.toDeg() + 360) % 360;
+  return (toDeg(brng) + 360) % 360;
 }
 
 function directionFromBearing(heading) {
