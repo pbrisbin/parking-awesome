@@ -23,6 +23,7 @@ function getLatLng() {
       alert(results[0].geometry.location); /* success */
     } else {
       alert("[geocoding error]");
+    }
   });
 }
 
