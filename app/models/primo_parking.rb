@@ -3,6 +3,16 @@ require 'uri'
 class PrimoParking
   include HTTParty
   
+  def self.normalize_distance(distance_string)
+    feet = distance_string.match(/(.*?) feet/)
+    return feet[1].to_i if feet
+    
+    miles = distance_string.match(/(.*?) mile/)
+    return miles[1].to_f * 5280 if miles
+    
+    nil
+  end
+  
   def self.results_for(address)
     pages = PrimoParking.pages_for(address)
     results = []
@@ -28,7 +38,7 @@ class PrimoParking
       PrimoParking.parse_link(item.css('a').first.text).merge(bad_idea).merge( {
         :limit => (item.css('b').first.text.strip rescue nil),
         :meter => item.css('font').first.nil? ? false : item.css('font').first.text.strip == '*' ,
-        :distance => item.css('i').first.text.strip, 
+        :distance => PrimoParking.normalize_distance(item.css('i').first.text.strip), 
         :until => PrimoParking.parse_until(item.to_s)  })
     end
   end

@@ -13,18 +13,7 @@ class Parking
     { "left" => left, 
       "right" => right }
   end
-  
-  
-  def self.normalize_distance(distance_string)
-    feet = distance_string.match(/(.*?) feet/)
-    return feet[1].to_i if feet
     
-    miles = distance_string.match(/(.*?) mile/)
-    return miles[1].to_f * 5280 if miles
-    
-    nil
-  end
-  
   def self.resolve_direction(heading, side)
     heading = DIRECTIONS[heading]
     side = DIRECTIONS[side]
@@ -36,6 +25,8 @@ class Parking
     
     offset > 180 ? :left : :right
   end
+  
+  
   #STUBS  
   def left
     {"flag" => 'meter', "message" => 'until 8pm'}

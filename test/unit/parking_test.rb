@@ -36,19 +36,13 @@ class ParkingTest < Test::Unit::TestCase
     assert_equal nil, Parking.resolve_direction('W', 'E')
   end
   
-  def test_normalize_distance
-    assert_equal 900, Parking.normalize_distance("900 feet")
-    assert_equal 1056, Parking.normalize_distance("0.2 miles")
-    assert_equal nil, Parking.normalize_distance('ajkshasjkhd')
-  end
   
   def test_parking_computes_correctly_for_valid_left
-    #seg = segment('W', false)
-    #assert_equal [15840, :left, seg], Parking.primo_message(seg, 'N')
+    seg = segment('W', false)
+  #  assert_equal [15840, :left, seg], Parking.primo_message(seg, 'N')
 
-    #seg = segment('E', false)
-    #assert_equal [15840, :right, seg], Parking.primo_message(seg, 'N')
-    
+    seg = segment('E', false)
+   # assert_equal [15840, :right, seg], Parking.primo_message(seg, 'N')
   end
   
   def test_parking_parses_correctly_for_invalid_left
