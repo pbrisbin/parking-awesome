@@ -30,4 +30,5 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 	gem 'fakeweb'
+  gem 'geocoder'
 # end
