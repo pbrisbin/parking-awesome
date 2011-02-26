@@ -12,11 +12,3 @@ function civicAPI(dataset, lng, lat, callback) {
       success:  callback
   });
 }
-
-function civicMeta(dataset, id, callback) {
-    $.ajax({
-        url:      url + dataset + "/" + id,
-        dataType: "jsonp",
-        success:  callback
-    });
-}
