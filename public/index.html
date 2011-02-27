@@ -40,7 +40,7 @@
               $("#streetsign").text(result.streetname);
 
               // check for snow emergency
-              isSnowEmergency(v function(data) {
+              isSnowEmergency(v, function(data) {
                 // is snow emergency
                 $(".lefticon").addClass("snow");
                 $(".righticon").addClass("snow");
@@ -56,14 +56,13 @@
                 } else if (result.right.message) {
                   $("#sidearrow").text(result.right.message);
                 }
-              }
+              });
             },
             failure: function(result) {
               alert("aww, snap!");
             }
           });
         });
-      });
     }
 
     function initVehicleFromAddress(address) {
