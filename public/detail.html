@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
   <link href="index.css" rel=stylesheet type=text/css>
   <link href="detail.css" rel=stylesheet type=text/css></head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <body>
 	<div id="left" class="side"><span id="lefttext" class="text">You can park here if you have a permit.</span></div>
 	<div id="right" class="side"><span id="righttext" class="text">You can't park here because it is a snow emergency.</span></div>
@@ -22,5 +23,49 @@
 		<span class="streetsign" id="address">Click Here to Enter a New Address</span>
 		<div id="streetsignpost"></div>
 	</div>
+        <script>
+            function gup(name) {
+                /* http://www.netlobo.com/url_query_string_javascript.html */
+                name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                var regexS = "[\\?&]"+name+"=([^&#]*)";
+                var regex = new RegExp(regexS);
+                var results = regex.exec(window.location.href);
+
+                if (results == null)
+                    return "";
+                else
+                    return results[1];
+            }
+
+            function updateDesign() {
+                if (!latitude || !longitude) {
+                    // todo: handle this case?
+                    return;
+                }
+
+                $.ajax({
+                    url: "parking_spots",
+                    data: {
+                        "latitude":  gup('latitude');
+                        "longitude": gup('longitude');
+                        "heading":   gpu('heading');
+                    },
+                    success: function(result) {
+                        if (result.left.message) {
+                            $("#lefttext").text(result.left.message);
+                        } 
+                            
+                        if (result.right.message) {
+                            $("#righttext").text(result.right.message);
+                        }
+                    },
+                    failure: function(result) {
+                        alert("aww, snap!");
+                    }
+                });
+            }
+
+            $(function() { updateDesign(); });
+        </script>
 </body>
 </html>
