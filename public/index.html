@@ -6,22 +6,17 @@
   <title>Can I Park?</title>
   <link href="index.css" rel=stylesheet type=text/css>
   <script type="text/javascript" src="js/GeoLoc.js"></script>
+  <script type="text/javascript" src="js/Vehicle.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
   <script type=text/javascript>
-    function glSuccess(position) {
-      var heading = directionFromBearing(position.coords.heading);
-      if (!heading) {
-        /* no movement */
-        heading = 'N'; /* dummy val */
-      }
-
+    $(document).ready(initVehicleFromGeoLocation(function(v) {
       $.ajax({
         url: "parking_spots",
         data: {
-          "latitude": position.coords.latitude,
-          "longitude": position.coords.longitude,
-          "heading": heading
+          "latitude": String(v.latitude),
+          "longitude": String(v.longitude),
+          "heading": String(v.heading.heading)
         },
         success: function(result) {
           $("#lefticon").addClass(result.left.flag);
@@ -37,20 +32,9 @@
         failure: function(result) {
           alert("aww, snap!");
         }
+        });
       })
-    }
-
-    function glUnsupported() {
-      /* return heading based on positioning */
-      return;
-    }
-
-    function glFailure() {
-      /* failboat */
-      return;
-    }
-
-    $(document).ready(getLocation(glSuccess, glUnsupported, glFailure));
+    );
   </script>
 </head>
 <body>
@@ -60,7 +44,7 @@
 	<div id="parkinginfo"></div>
 	<div class="icon" id="lefticon"></div>
 	<div class="icon" id="righticon"></div>
-	<div id="streetsign">Random St.</div>
+	<div id="streetsign">Locating...</div>
 	<div id="streetsignpost"></div>
 </body>
 </html>
