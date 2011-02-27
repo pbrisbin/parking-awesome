@@ -1,3 +1,24 @@
+@import url(http://fonts.googleapis.com/css?family=Schoolbell);
+@import url(http://fonts.googleapis.com/css?family=Cabin:bold);
+
+#sidearrow {
+	text-shadow: 2px 2px 2px #5A5A5A;
+	font-family: 'Schoolbell', arial, serif; 
+	position: absolute;
+	z-index:4;
+	font-size:300%;
+	background-image:url("arrow3.png");
+	background-repeat:no-repeat;
+	height:200px;
+	width:320px;
+	top:0px;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	padding: 70px 0px 0px 0px;
+}
+
 body {
 	background:#5A5A5A;
 	text-align: center;
@@ -56,41 +77,30 @@ body {
 	right:0;
 	margin-left:auto;
 	margin-right:auto;
-}
-
-#sidearrow {
-	position: absolute;
-	z-index:4;
-	font-size:150%;
-	background-image:url(trafficimage.gif);
-	height:74px;
-	width:255px;
-	top:0;
-	left:0;
-	right:0;
-	margin-left:auto;
-	margin-right:auto;
-	padding: 40px 0px 0px 0px;
+	background: -moz-linear-gradient(left, #35425d 80%, #fff 100%);
+	background: -webkit-gradient(linear, left center, right center, from(#35425d), color-stop(0.8,#35425d),to(#fff));
 }
 
 .icon {
 	position: fixed;
-	height:100px;
-	width:100px;
-	top:0;
-	bottom:0;
+	height:230px;
+	width:130px;
+	top:0px;
+	bottom:0px;
 	margin-top:auto;
-	margin-bottom:auto;
+	margin-bottom:100px;
 	background-repeat:no-repeat;
+	background-position:center; 
 }
 
 #lefticon {
-	background-image:url(gap_car_icon.gif);
-	left:35px;
+	background-image:url("freeparkingleft.png");
+	left:15px;
 	
 }
 
 #righticon {
-	background-image:url(redXicon.png);
-	right:35px;
+	background-image:url("freeparkingright.png");
+	right:15px;
 }
+
