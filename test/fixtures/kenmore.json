@@ -1,0 +1,63 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "route" ],
+    "formatted_address": "Kenmore St, Boston, MA 02215, USA",
+    "address_components": [ {
+      "long_name": "Kenmore St",
+      "short_name": "Kenmore St",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    }, {
+      "long_name": "02215",
+      "short_name": "02215",
+      "types": [ "postal_code" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3487916,
+        "lng": -71.0949759
+      },
+      "location_type": "GEOMETRIC_CENTER",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3455434,
+          "lng": -71.0980789
+        },
+        "northeast": {
+          "lat": 42.3518386,
+          "lng": -71.0917836
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.3480399,
+          "lng": -71.0949951
+        },
+        "northeast": {
+          "lat": 42.3493421,
+          "lng": -71.0948674
+        }
+      }
+    }
+  } ]
+}

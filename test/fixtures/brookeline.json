@@ -1,0 +1,240 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "locality", "political" ],
+    "formatted_address": "Boston, MA, USA",
+    "address_components": [ {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3584308,
+        "lng": -71.0597732
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.2263702,
+          "lng": -71.3158920
+        },
+        "northeast": {
+          "lat": 42.4902144,
+          "lng": -70.8036544
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.2278800,
+          "lng": -71.1911130
+        },
+        "northeast": {
+          "lat": 42.4008199,
+          "lng": -70.7494550
+        }
+      }
+    },
+    "partial_match": true
+  }, {
+    "types": [ "locality", "political" ],
+    "formatted_address": "Brookline, MA, USA",
+    "address_components": [ {
+      "long_name": "Brookline",
+      "short_name": "Brookline",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Norfolk",
+      "short_name": "Norfolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3317642,
+        "lng": -71.1211635
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.2945969,
+          "lng": -71.1789960
+        },
+        "northeast": {
+          "lat": 42.3518110,
+          "lng": -71.1056969
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.2945969,
+          "lng": -71.1789960
+        },
+        "northeast": {
+          "lat": 42.3518110,
+          "lng": -71.1056969
+        }
+      }
+    },
+    "partial_match": true
+  }, {
+    "types": [ "political" ],
+    "formatted_address": "Brookline, Massachusetts, USA",
+    "address_components": [ {
+      "long_name": "Brookline",
+      "short_name": "Brookline",
+      "types": [ "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3232927,
+        "lng": -71.1389101
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.2945970,
+          "lng": -71.1789980
+        },
+        "northeast": {
+          "lat": 42.3516970,
+          "lng": -71.1056960
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.2945970,
+          "lng": -71.1789980
+        },
+        "northeast": {
+          "lat": 42.3516970,
+          "lng": -71.1056960
+        }
+      }
+    }
+  }, {
+    "types": [ "political" ],
+    "formatted_address": "Boston, Massachusetts, USA",
+    "address_components": [ {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3094288,
+        "lng": -71.0854325
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.2277980,
+          "lng": -71.1911980
+        },
+        "northeast": {
+          "lat": 42.3987970,
+          "lng": -70.9821865
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.2277980,
+          "lng": -71.1911980
+        },
+        "northeast": {
+          "lat": 42.3987970,
+          "lng": -70.9821865
+        }
+      }
+    }
+  }, {
+    "types": [ "point_of_interest", "establishment" ],
+    "formatted_address": "Boston, 23-25 Farrington Ave, Cambridge, MA 02138, USA",
+    "address_components": [ {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "point_of_interest", "establishment" ]
+    }, {
+      "long_name": "23-25",
+      "short_name": "23-25",
+      "types": [ "street_number" ]
+    }, {
+      "long_name": "Farrington Ave",
+      "short_name": "Farrington Ave",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Cambridge",
+      "short_name": "Cambridge",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    }, {
+      "long_name": "02138",
+      "short_name": "02138",
+      "types": [ "postal_code" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3719740,
+        "lng": -71.1237140
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3688264,
+          "lng": -71.1268616
+        },
+        "northeast": {
+          "lat": 42.3751216,
+          "lng": -71.1205664
+        }
+      }
+    },
+    "partial_match": true
+  } ]
+}

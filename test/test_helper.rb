@@ -22,7 +22,27 @@ def setup_geocoder_fakeweb
   FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Huntington+Ave%2C+Boston",
     :body => File.open('test/fixtures/huntington_ave_boston.json').read
   FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?latlng=42.3478%2C-71.080637&sensor=false",
-      :body => File.open('test/fixtures/huntington_ave_boston.json').read
+    :body => File.open('test/fixtures/huntington_ave_boston.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Arlington+St%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/arlington.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Charlesgate+East%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/charlesgate.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Commonwealth%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/comm_ave.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Brookline%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/brookeline.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Brookline+Ave%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/brookeline2.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?address=Kenmore+St%2C+Boston%2C+MA&sensor=false",
+    :body => File.open('test/fixtures/kenmore.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?address=Arlington+St+at+newbury%2C+Boston%2C+MA&sensor=false",
+    :body => File.open('test/fixtures/arlington_at_newbury.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?address=Charlesgate+East+at+newbury%2C+Boston%2C+MA&sensor=false",
+    :body => File.open('test/fixtures/charlesgate_at_newbury.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Brookline+Ave+at+newbury%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/brookline_at_newbury.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Kenmore+St+at+newbury%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/kenmore_at_newbury.json').read
 end
 
 def setup_street_cleaning_fakeweb

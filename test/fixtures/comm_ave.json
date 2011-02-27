@@ -1,0 +1,55 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "neighborhood", "political" ],
+    "formatted_address": "Commonwealth, Boston, MA, USA",
+    "address_components": [ {
+      "long_name": "Commonwealth",
+      "short_name": "Commonwealth",
+      "types": [ "neighborhood", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3362641,
+        "lng": -71.1522784
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3197659,
+          "lng": -71.1842932
+        },
+        "northeast": {
+          "lat": 42.3527580,
+          "lng": -71.1202636
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.3300970,
+          "lng": -71.1690980
+        },
+        "northeast": {
+          "lat": 42.3532740,
+          "lng": -71.1225360
+        }
+      }
+    }
+  } ]
+}

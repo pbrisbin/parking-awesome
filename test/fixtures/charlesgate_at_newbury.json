@@ -1,0 +1,54 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "intersection" ],
+    "formatted_address": "Charlesgate E & Newbury St, Boston, MA 02215, USA",
+    "address_components": [ {
+      "long_name": "Charlesgate E",
+      "short_name": "Charlesgate E",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    }, {
+      "long_name": "02215",
+      "short_name": "02215",
+      "types": [ "postal_code" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3480480,
+        "lng": -71.0915890
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3449004,
+          "lng": -71.0947366
+        },
+        "northeast": {
+          "lat": 42.3511956,
+          "lng": -71.0884414
+        }
+      }
+    },
+    "partial_match": true
+  } ]
+}

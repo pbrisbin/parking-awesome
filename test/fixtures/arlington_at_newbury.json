@@ -1,0 +1,54 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "intersection" ],
+    "formatted_address": "Arlington St & Newbury St, Boston, MA 02116, USA",
+    "address_components": [ {
+      "long_name": "Arlington St",
+      "short_name": "Arlington St",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    }, {
+      "long_name": "02116",
+      "short_name": "02116",
+      "types": [ "postal_code" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3526848,
+        "lng": -71.0710695
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3495372,
+          "lng": -71.0742171
+        },
+        "northeast": {
+          "lat": 42.3558324,
+          "lng": -71.0679219
+        }
+      }
+    },
+    "partial_match": true
+  } ]
+}

@@ -1,0 +1,118 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "route" ],
+    "formatted_address": "Arlington St, Boston, MA, USA",
+    "address_components": [ {
+      "long_name": "Arlington St",
+      "short_name": "Arlington St",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3514217,
+        "lng": -71.0704529
+      },
+      "location_type": "GEOMETRIC_CENTER",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3474802,
+          "lng": -71.0737889
+        },
+        "northeast": {
+          "lat": 42.3555077,
+          "lng": -71.0674937
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.3474802,
+          "lng": -71.0726750
+        },
+        "northeast": {
+          "lat": 42.3555077,
+          "lng": -71.0686076
+        }
+      }
+    }
+  }, {
+    "types": [ "route" ],
+    "formatted_address": "Arlington St, Boston, MA 02136, USA",
+    "address_components": [ {
+      "long_name": "Arlington St",
+      "short_name": "Arlington St",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    }, {
+      "long_name": "02136",
+      "short_name": "02136",
+      "types": [ "postal_code" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.2616117,
+        "lng": -71.1184099
+      },
+      "location_type": "GEOMETRIC_CENTER",
+      "viewport": {
+        "southwest": {
+          "lat": 42.2580639,
+          "lng": -71.1230010
+        },
+        "northeast": {
+          "lat": 42.2643591,
+          "lng": -71.1152868
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.2590150,
+          "lng": -71.1230010
+        },
+        "northeast": {
+          "lat": 42.2634080,
+          "lng": -71.1152868
+        }
+      }
+    }
+  } ]
+}
