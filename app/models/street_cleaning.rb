@@ -42,10 +42,22 @@ class StreetCleaning
     result
   end
   
+  def self.week_of_month
+    # TODO: this is not the correct value instead of estimating
+    (Time.now.day / 7).to_i + 1
+  end
+  
   def self.day(full_string)
     day = full_string.split(' ').last
     return nil if day.blank? || day.match(/every/i)
     day
+  end
+  
+  def self.does_day_apply(day, month_dates=nil)
+    return true if day.blank?
+    return false if (Date::DAYNAMES[Time.now.wday] rescue '').match(Regexp.compile(day, 'i')).blank? 
+    
+    return ! month_dates.index(week_of_month.to_s).blank? && month_dates != []
   end
   
   def self.weeks(full_string)
