@@ -1,5 +1,10 @@
 class ParkingSpotsController < ApplicationController
   def index
-    render :json => Parking.new(:address => params[:address], :heading => params[:heading], :latitude => params[:latitude], :longitude => params[:longitude]).to_json
+    p = Parking.new(:address => params[:address], :heading => params[:heading], :latitude => params[:latitude], :longitude => params[:longitude])
+    if(p.valid?)
+      render :json => p.to_json
+    else
+      render :json => p.to_json, :status => :unprocessable_entity      
+    end
   end
 end
