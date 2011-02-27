@@ -13,17 +13,14 @@
       var heading = directionFromBearing(position.coords.heading);
       if (!heading) {
         /* no movement */
-        heading = 'W'; /* dummy val */
+        heading = 'N'; /* dummy val */
       }
 
       $.ajax({
         url: "parking_spots",
         data: {
-          /*
           "latitude": position.coords.latitude,
           "longitude": position.coords.longitude,
-          */
-          "address": "Newbury St, Boston MA",
           "heading": heading
         },
         success: function(result) {
@@ -57,7 +54,7 @@
   </script>
 </head>
 <body>
-	<div id="sidearrow">Loading...</div>
+	<div id="sidearrow"></div>
 	<div class="centerline" id="one"></div>
 	<div class="centerline" id="two"></div>
 	<div id="parkinginfo"></div>
