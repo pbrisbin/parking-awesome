@@ -4,7 +4,8 @@
   <meta charset=utf-8>
   <link href='http://fonts.googleapis.com/css?family=Cabin:bold' rel='stylesheet' type='text/css'>
   <title>Can Haz Parking?</title>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  <meta name="viewport" content="width=380px; maximum-scale=1.0; user-scalable=0;" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <link href="index.css" rel=stylesheet type=text/css>
   <script type="text/javascript" src="js/GeoLoc.js"></script>
   <script type="text/javascript" src="js/Vehicle.js"></script>
@@ -76,9 +77,10 @@
   <div id="parkinginfo"></div>
   <div class="icon" id="lefticon"></div>
   <div class="icon" id="righticon"></div>
-  <div id="signcontainer"><span id="streetsign">Locating...</span></div>
-  <div id="streetsignpost"></div>
-  <div id="map_canvas"></div>
+  <div id="signcontainer">
+    <span id="streetsign">Locating...</span>
+    <div id="streetsignpost"></div>
+  </div>
 </body>
 </html>
 
