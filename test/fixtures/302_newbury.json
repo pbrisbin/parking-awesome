@@ -1,0 +1,425 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "street_address" ],
+    "formatted_address": "302 Newbury St, Boston, MA 02115, USA",
+    "address_components": [ {
+      "long_name": "302",
+      "short_name": "302",
+      "types": [ "street_number" ]
+    }, {
+      "long_name": "Newbury St",
+      "short_name": "Newbury St",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    }, {
+      "long_name": "02115",
+      "short_name": "02115",
+      "types": [ "postal_code" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3486720,
+        "lng": -71.0850190
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3455244,
+          "lng": -71.0881666
+        },
+        "northeast": {
+          "lat": 42.3518196,
+          "lng": -71.0818714
+        }
+      }
+    }
+  }, {
+    "types": [ "neighborhood", "political" ],
+    "formatted_address": "Back Bay West, Boston, MA, USA",
+    "address_components": [ {
+      "long_name": "Back Bay West",
+      "short_name": "Back Bay West",
+      "types": [ "neighborhood", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3494093,
+        "lng": -71.0898892
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3476399,
+          "lng": -71.0932961
+        },
+        "northeast": {
+          "lat": 42.3539351,
+          "lng": -71.0823391
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.3476970,
+          "lng": -71.0932961
+        },
+        "northeast": {
+          "lat": 42.3538780,
+          "lng": -71.0823391
+        }
+      }
+    }
+  }, {
+    "types": [ "neighborhood", "political" ],
+    "formatted_address": "Back Bay, Boston, MA, USA",
+    "address_components": [ {
+      "long_name": "Back Bay",
+      "short_name": "Back Bay",
+      "types": [ "neighborhood", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3500974,
+        "lng": -71.0869960
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3415970,
+          "lng": -71.0932961
+        },
+        "northeast": {
+          "lat": 42.3569830,
+          "lng": -71.0702899
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.3415970,
+          "lng": -71.0932961
+        },
+        "northeast": {
+          "lat": 42.3569830,
+          "lng": -71.0702899
+        }
+      }
+    }
+  }, {
+    "types": [ "postal_code" ],
+    "formatted_address": "Boston, MA 02115, USA",
+    "address_components": [ {
+      "long_name": "02115",
+      "short_name": "02115",
+      "types": [ "postal_code" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3431015,
+        "lng": -71.0878067
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3307870,
+          "lng": -71.1134369
+        },
+        "northeast": {
+          "lat": 42.3554169,
+          "lng": -71.0807799
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.3307870,
+          "lng": -71.1134369
+        },
+        "northeast": {
+          "lat": 42.3554169,
+          "lng": -71.0807799
+        }
+      }
+    }
+  }, {
+    "types": [ "locality", "political" ],
+    "formatted_address": "Boston, MA, USA",
+    "address_components": [ {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3584308,
+        "lng": -71.0597732
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.2278800,
+          "lng": -71.1911130
+        },
+        "northeast": {
+          "lat": 42.4008199,
+          "lng": -70.7494550
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.2278800,
+          "lng": -71.1911130
+        },
+        "northeast": {
+          "lat": 42.4008199,
+          "lng": -70.7494550
+        }
+      }
+    }
+  }, {
+    "types": [ "administrative_area_level_3", "political" ],
+    "formatted_address": "Boston, MA, USA",
+    "address_components": [ {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3352706,
+        "lng": -71.0141180
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.2278800,
+          "lng": -71.1911130
+        },
+        "northeast": {
+          "lat": 42.4008199,
+          "lng": -70.7494550
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.2278800,
+          "lng": -71.1911130
+        },
+        "northeast": {
+          "lat": 42.4008199,
+          "lng": -70.7494550
+        }
+      }
+    }
+  }, {
+    "types": [ "administrative_area_level_2", "political" ],
+    "formatted_address": "Suffolk, Massachusetts, USA",
+    "address_components": [ {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3576609,
+        "lng": -70.9784562
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.2278800,
+          "lng": -71.1911130
+        },
+        "northeast": {
+          "lat": 42.4500959,
+          "lng": -70.6480720
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.2278800,
+          "lng": -71.1911130
+        },
+        "northeast": {
+          "lat": 42.4500959,
+          "lng": -70.6480720
+        }
+      }
+    }
+  }, {
+    "types": [ "administrative_area_level_1", "political" ],
+    "formatted_address": "Massachusetts, USA",
+    "address_components": [ {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.4072107,
+        "lng": -71.3824374
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 41.1870530,
+          "lng": -73.5081419
+        },
+        "northeast": {
+          "lat": 42.8867900,
+          "lng": -69.8588609
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 41.1870530,
+          "lng": -73.5081419
+        },
+        "northeast": {
+          "lat": 42.8867900,
+          "lng": -69.8588609
+        }
+      }
+    }
+  }, {
+    "types": [ "country", "political" ],
+    "formatted_address": "United States",
+    "address_components": [ {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 37.0902400,
+        "lng": -95.7128910
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 18.7763000,
+          "lng": 170.5957000
+        },
+        "northeast": {
+          "lat": 71.5388000,
+          "lng": -66.8850749
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 18.7763000,
+          "lng": 170.5957000
+        },
+        "northeast": {
+          "lat": 71.5388000,
+          "lng": -66.8850749
+        }
+      }
+    }
+  } ]
+}
