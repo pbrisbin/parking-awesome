@@ -1,14 +1,31 @@
-/* look for snow route features at the given position; if features, call 
- * success(features), else call failure (optional).
- */
-function isSnowRoute(vehicle, success, failure) {
-    civicApiPoint('bos_snow_routes', vehicle.position, function(data) {
+// if the function is undefined, just return, else call it. allows for 
+// optional callbacks in other functions
+function optional(falure) { if (typeof(failure) == 'undefined') return else failure; }
+
+/* note: the failure callback is optional */
+function isSnowEmergency(vehicle, success, failure) {
+    var dataset = 'bos_snow_routes';
+    var url     = '/snow_emergency';
+
+    civicApiPoint(dataset, vehicle.position, function(data) {
+        // it is a snow route
         if (data.features.length) {
-            success(data.features);
+            $.ajax({
+                url:      url
+                dataType: "jsonp"
+                success:  function(reply) {
+                    // it is a snow emergency
+                    if (reply.value) {
+                        success(data.features);
+                    }
+                    else {
+                        optional(failure);
+                    }
+                }
+            });
         }
         else {
-            // just return if user doesn't pass a fail callback
-            if (typeof(failure) == 'undefined') return else failure;
+            optional(failure);
         }
     });
 }
