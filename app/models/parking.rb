@@ -16,7 +16,7 @@ class Parking
 
     end
     @primo_response = PrimoParking.results_for(address)
-    @street = StreetCleaning.new(:side_of_evens => self.evens.downcase, :street_name => self.address, :latitude => self.latitude, :longitude => self.longitude) rescue nil
+    @street = StreetCleaning.new(:side_of_evens => self.evens.downcase, :street_name => self.address.gsub(/\d|-|\s|st/i, ''), :latitude => self.latitude, :longitude => self.longitude) rescue nil
   end
     
   def as_json(options={})
@@ -43,13 +43,13 @@ class Parking
   
   def left
     resp = PrimoParking.parse_descriptor(primo_summary[:left])
-    resp.merge!( @street.summarize[:left]) if resp[:flag] == 'ok' && @street && @street.summarize[:left] rescue nil
+    resp.merge!( @street.summarize[:left]) if resp[:flag] == 'freeparking' && @street && @street.summarize[:left] rescue nil
     resp
   end
   
   def right
    resp = PrimoParking.parse_descriptor(primo_summary[:right])
-   resp.merge!( @street.summarize[:right]) if resp[:flag] == 'ok' && @street && @street.summarize[:right] rescue nil
+   resp.merge!( @street.summarize[:right]) if resp[:flag] == 'freeparking' && @street && @street.summarize[:right] rescue nil
    resp
   end
   
