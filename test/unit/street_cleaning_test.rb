@@ -148,9 +148,24 @@ class StreetCleaningTest < Test::Unit::TestCase
   end
   
   def test_does_day_apply
-    #assert_equal true, StreetCleaning.does_time_apply("Everyday")
+    Timecop.freeze Date.new(2010, 5, 11) do
+      assert_equal true, StreetCleaning.does_day_apply(nil)
+      assert_equal true, StreetCleaning.does_day_apply("Tues")
+      assert_equal false, StreetCleaning.does_day_apply("Wed")
+    end
   end
-  
+  def test_week_of_month
+    Timecop.freeze Date.new(2010, 5, 11) do
+      assert_equal 2, StreetCleaning.week_of_month
+    end
+  end
+  def test_does_day_apply
+    Timecop.freeze Date.new(2010, 5, 11) do
+      assert_equal true, StreetCleaning.does_day_apply("Tues", ["1", "2", "3", "4"])
+      assert_equal true, StreetCleaning.does_day_apply("Tues", ["2"])
+      assert_equal false, StreetCleaning.does_day_apply("Tues", ["1", "3", "4"])
+    end
+  end
   
   def test_does_time_apply
     
