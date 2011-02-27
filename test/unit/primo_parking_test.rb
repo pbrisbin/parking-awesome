@@ -33,7 +33,7 @@ class PrimoParkingTest < Test::Unit::TestCase
   end
   
   def test_parse_primo_into_descriptor_ok
-    expected = {:flag => 'ok'}
+    expected = {:flag => 'ok', :message => 'you can has'}
     assert_equal expected, PrimoParking.parse_descriptor({:until=>"Thu&nbsp;12:00am",
       :section=>"Mass Ave-Harcourt St",
       :meter=>false,
@@ -67,7 +67,7 @@ class PrimoParkingTest < Test::Unit::TestCase
   end
   
   def test_parse_primo_into_descriptor_nil
-    expected = {:flag => 'ok'}
+    expected = {:flag => 'ok', :message => 'you can has'}
     assert_equal expected, PrimoParking.parse_descriptor(nil)
   end
   
