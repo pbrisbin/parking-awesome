@@ -11,19 +11,25 @@
   <script type=text/javascript>
     function glSuccess(position) {
       var heading = directionFromBearing(position.coords.heading);
+      if (!heading) {
+        /* no movement */
+        heading = 'W'; /* dummy val */
+      }
 
       $.ajax({
         url: "parking_spots",
         data: {
+          /*
           "latitude": position.coords.latitude,
           "longitude": position.coords.longitude,
+          */
+          "address": "Newbury St, Boston MA",
           "heading": heading
         },
         success: function(result) {
-          alert('aww yeah');
-          $("#lefticon").addClass(result.left.icon);
-          $("#righticon").addClass(result.right.icon);
-          $("#streetsign").addClass(result.streetname)
+          $("#lefticon").addClass(result.left.flag);
+          $("#righticon").addClass(result.right.flag);
+          $("#streetsign").text(result.streetname);
 
           if (result.left.message) {
             $("#sidearrow").text(result.left.message);
@@ -51,7 +57,7 @@
   </script>
 </head>
 <body>
-	<div id="sidearrow">Park Until 2:00 PM</div>
+	<div id="sidearrow">Loading...</div>
 	<div class="centerline" id="one"></div>
 	<div class="centerline" id="two"></div>
 	<div id="parkinginfo"></div>
