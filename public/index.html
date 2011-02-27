@@ -17,8 +17,10 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
   <script type=text/javascript>
-
     function updateLoc(v) {
+      $("#g-lat").val(v.latitude);
+      $("#g-lng").val(v.longitude);
+
       $.ajax({
         url: "parking_spots",
         data: {
@@ -50,6 +52,7 @@
           if (results.length == 0) {
             return;
           }
+
           var position = {
             coords: {
               longitude: results[0].geometry.location.lng(),
@@ -102,6 +105,7 @@
       $("#streetsign").click(function() {
         getAddress("Please enter an address:");
       });
+
     });
 
     $(document).ready(initVehicleFromGeoLocation(updateLoc, getAddress, cbFail));
@@ -113,6 +117,8 @@
       <fieldset>
         <label name="address" for="addressInput">Geolocation failed. Please enter your address:</label>
         <input type="text" id="addressInput" class="text ui-widget-content ui-corner-all" />
+        <input type="hidden" id="g-lat" value="" />
+        <input type="hidden" id="g-lng" value="" />
       </fieldset>
     </form>
   </div>
