@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Schoolbell);
 @import url(http://fonts.googleapis.com/css?family=Cabin:bold);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
 
 #sidearrow {
 	text-shadow: 2px 2px 2px #5A5A5A;
@@ -77,8 +78,8 @@ body {
 	right:0;
 	margin-left:auto;
 	margin-right:auto;
-	background: -moz-linear-gradient(left, #35425d 80%, #fff 100%);
-	background: -webkit-gradient(linear, left center, right center, from(#35425d), color-stop(0.8,#35425d),to(#fff));
+	background: -moz-linear-gradient(left, #838383 60%, #fff 100%);
+	background: -webkit-gradient(linear, left center, right center, from(#838383), color-stop(0.6,#838383),to(#fff));
 }
 
 .icon {
@@ -104,3 +105,14 @@ body {
 	right:15px;
 }
 
+.noparking {
+	background-image:url("x.png");
+}
+
+.meter {
+	background-image:url("meter.png");
+}
+
+.permit {
+	background-image:url("permit.png");
+}
