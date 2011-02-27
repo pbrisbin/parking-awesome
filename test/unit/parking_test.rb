@@ -13,8 +13,8 @@ class ParkingTest < Test::Unit::TestCase
   end
   
   def test_parking_as_json
-    expected = {"streetname" => "Huntington Ave", "left"=>{:flag=>"no", :message=>"bad idea"},
-     "right"=>{:flag=>"no", :message=>"bad idea"}}
+    expected = {"streetname" => "Huntington Ave", "left"=>{:flag=>"noparking", :message=>"bad idea"},
+     "right"=>{:flag=>"noparking", :message=>"bad idea"}}
     assert_equal expected, Parking.new(:address => ADDRESS, :heading => 'N').as_json
   end
   
@@ -102,7 +102,7 @@ class ParkingTest < Test::Unit::TestCase
   
   def test_left_and_right
     p = Parking.new(:address => ADDRESS, :heading => 'N')
-    bad_idea = {:flag => 'no', :message => 'bad idea'}
+    bad_idea = {:flag => 'noparking', :message => 'bad idea'}
     assert_equal bad_idea, p.left
     assert_equal bad_idea, p.right
   end
