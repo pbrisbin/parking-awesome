@@ -41,6 +41,19 @@ class StreetCleaning
     end
     result
   end
+  
+  def self.day(full_string)
+    day = full_string.split(' ').last
+    return nil if day.blank? || day.match(/every/i)
+    day
+  end
+  
+  def self.weeks(full_string)
+    split = full_string.split(' ')
+    return nil if split.count < 2
+    ccount = split.count.to_s.to_i
+    split[0, ccount -1]
+  end
   private
   
   def self.geometry_lat_lng(geometry)
