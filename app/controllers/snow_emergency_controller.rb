@@ -17,6 +17,6 @@ class SnowEmergencyController < ApplicationController
 
     imap.logout()
 
-    render :json => ret
+    render :json => {:value => ret}
   end
 end
