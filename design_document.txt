@@ -1,0 +1,9 @@
+Types of parking data:
+* Snow Emergency -- is one now?
+* Snow Emergency -- if so, can I park here?
+* Which side of the street?
+* What permit is requires?
+* Is it a metered spot?
+* How long can you park here?
+* Street Cleaning -- is one now?
+* Street Cleaning -- if so, can I park here?

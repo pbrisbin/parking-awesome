@@ -1,0 +1,96 @@
+body {
+	background:#5A5A5A;
+	text-align: center;
+	font-family: 'Cabin', arial, serif; 
+}
+
+.centerline {
+	z-index:-1;
+	position: absolute;
+	background:#F90;
+	height:100%;
+	width:6px;
+}
+
+#one{
+	left:48%;
+	right: auto;
+	top:0px;
+	bottom:0px;
+}
+
+#two{
+	right:48%;
+	left: auto;
+	top:0px;
+	bottom:0px;
+}
+
+
+#streetsign {
+	z-index:3;
+	position: absolute;
+	width: 200px;
+	background:#093;
+	bottom:40px;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	color: #FFF;
+	font-size:200%;
+	border-style:solid;
+	border-width:2px;
+	border-color:#FFF;
+}
+
+#streetsignpost{
+	z-index:2;
+	position: absolute;
+	background:#C3C3C3;
+	width:20px;
+	height:40px;
+	top:auto;
+	bottom:0px;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#sidearrow {
+	position: absolute;
+	z-index:4;
+	font-size:150%;
+	background-image:url(trafficimage.gif);
+	height:74px;
+	width:255px;
+	top:0;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	padding: 40px 0px 0px 0px;
+}
+
+.icon {
+	position: fixed;
+	height:100px;
+	width:100px;
+	top:0;
+	bottom:0;
+	margin-top:auto;
+	margin-bottom:auto;
+	background-repeat:no-repeat;
+}
+
+#lefticon {
+	background-image:url(gap_car_icon.gif);
+	left:35px;
+	
+}
+
+#righticon {
+	background-image:url(redXicon.png);
+	right:35px;
+}
