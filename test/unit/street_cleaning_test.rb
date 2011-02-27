@@ -93,7 +93,31 @@ class StreetCleaningTest < Test::Unit::TestCase
     assert_equal expected, sc.cleaning_times
   end
 
+  def test_active_street_cleanings_both_sides
+    sc = StreetCleaning.new(:side_of_evens => 'left', :street_name => 'newbury', :latitude => LAT, :longitude => LON)
+    
+    Timecop.freeze Date.new(2010, 5, 11) do
+      expected= { :left => {:flag => 'noparking', :message => 'Everyday 12:01am - 7am'},
+                  :right =>{:flag => 'noparking', :message => 'Everyday 12:01am - 7am'} }
+    
+      assert_equal expected, sc.summarize
+    end
+  end
 
+  def test_one_side_street_cleanings
+    sc = StreetCleaning.new(:side_of_evens => 'left', :street_name => 'newburyeven', :latitude => LAT, :longitude => LON)
+    # Applies to even side of street
+    # Evens are on left
+    # left
+    
+    Timecop.freeze Date.new(2010, 5, 11) do
+      expected= { :left => {:flag => 'noparking', :message => 'Everyday 12:01am - 7am'}}    
+      assert_equal expected, sc.summarize
+    end
+  end
+
+
+  
   
   def test_active_street_cleanings_odd_left
     sc = StreetCleaning.new(:side_of_evens => 'left', :street_name => 'newburyodd', :latitude => LAT, :longitude => LON)
@@ -159,6 +183,7 @@ class StreetCleaningTest < Test::Unit::TestCase
       assert_equal 2, StreetCleaning.week_of_month
     end
   end
+  
   def test_does_day_apply
     Timecop.freeze Date.new(2010, 5, 11) do
       assert_equal true, StreetCleaning.does_day_apply("Tues", ["1", "2", "3", "4"])
