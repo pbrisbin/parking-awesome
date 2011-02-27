@@ -3,7 +3,7 @@
 <head>
   <meta charset=utf-8>
   <title>Can Haz Parking?</title>
-  <meta name="viewport" content="width=380px;" />
+  <meta name="viewport" content="width=380px;initial-scale:0.9" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link href="index.css" rel=stylesheet type=text/css>
   <link rel="apple-touch-icon" href="canpark.png" />
@@ -67,7 +67,11 @@
       });
     }
 
-    function getAddress() {
+    function getAddress(msg) {
+      if (msg) {
+        $("label").text(msg);
+      }
+
       $("#dialog-form").dialog({
         autoOpen: true,
         modal: true,
@@ -96,7 +100,7 @@
       });
 
       $("#streetsign").click(function() {
-        getAddress();
+        getAddress("Please enter an address:");
       });
     });
 
@@ -104,7 +108,7 @@
   </script>
 </head>
 <body>
-  <div id="dialog-form">
+  <div id="dialog-form" style="display: none;">
     <form>
       <fieldset>
         <label name="address" for="addressInput">Geolocation failed. Please enter your address:</label>

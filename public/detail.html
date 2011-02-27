@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang=en>
+<head>
+  <meta charset=utf-8>
+  <link href='http://fonts.googleapis.com/css?family=Cabin:bold' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <title>Why Can I Park?</title>
+  <link rel="SHORTCUT ICON" href="canpark.ico" />
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  <link href="index.css" rel=stylesheet type=text/css>
+  <link href="detail.css" rel=stylesheet type=text/css></head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<body>
+	<div id="left" class="side"><span id="lefttext" class="text">You can park here if you have a permit.</span></div>
+	<div id="right" class="side"><span id="righttext" class="text">You can't park here because it is a snow emergency.</span></div>
+	<div class="centerline" id="one"></div>
+	<div class="centerline" id="two"></div>
+	<div class="button" id="fineinfo"><script>$("how much might it cost?").button();</script></div>
+	<div class="button" id="newadd"><script>$("check a different address").button();</script></div>
+
+	<div id="signcontainer">
+		<span class="streetsign" id="back"><a href="http://canhazparking.com">Can You Park Here?</a></span><br>
+		<span class="streetsign" id="address">Enter a New Address</span><br>
+		<span class="streetsign" id="moreinfo">About Us</span>
+		<div id="streetsignpost"></div>
+	</div>
+        <script>
+            function gup(name) {
+                /* http://www.netlobo.com/url_query_string_javascript.html */
+                name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                var regexS = "[\\?&]"+name+"=([^&#]*)";
+                var regex = new RegExp(regexS);
+                var results = regex.exec(window.location.href);
+
+                if (results == null)
+                    return "";
+                else
+                    return results[1];
+            }
+
+            function updateDesign() {
+                var latitude  = gup('latitude');
+                var longitude = gup('longitude');
+                var heading   = gup('heading');
+
+                if (!latitude || !longitude) {
+                    // handle this?
+                    return;
+                }
+
+                $.ajax({
+                    url: "parking_spots",
+                    data: {
+                        "latitude":  gup('latitude'),
+                        "longitude": gup('longitude'),
+                        "heading":   gup('heading')
+                    },
+                    success: function(result) {
+                        if (result.left.message) {
+                            $("#lefttext").text(result.left.message);
+                        } 
+                            
+                        if (result.right.message) {
+                            $("#righttext").text(result.right.message);
+                        }
+                    },
+                    failure: function(result) {
+                        alert("aww, snap!");
+                    }
+                });
+            }
+
+            $(function() { updateDesign(); });
+        </script>
+</body>
+</html>
