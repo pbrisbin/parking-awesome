@@ -18,31 +18,37 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
   <script type=text/javascript>
     function updateLoc(v) {
-      $("#g-lat").val(v.latitude);
-      $("#g-lng").val(v.longitude);
-      $("#g-head").val(v.heading.toString());
+      v.sideOfEvens(function(s) {
+        var side = s ? "Right" : "Left";
 
-      $.ajax({
-        url: "parking_spots",
-        data: {
-          "latitude": v.latitude,
-          "longitude": v.longitude,
-          "heading": v.heading.toString()
-        },
-        success: function(result) {
-          $(".lefticon").addClass(result.left.flag);
-          $(".righticon").addClass(result.right.flag);
-          $("#streetsign").text(result.streetname);
+        $("#g-lat").val(v.latitude);
+        $("#g-lng").val(v.longitude);
+        $("#g-head").val(v.heading.toString());
+        $("#g-side").val(side);
 
-          if (result.left.message) {
-            $("#sidearrow").text(result.left.message);
-          } else if (result.right.message) {
-            $("#sidearrow").text(result.right.message);
+        $.ajax({
+          url: "parking_spots",
+          data: {
+            "latitude": v.latitude,
+            "longitude": v.longitude,
+            "heading": v.heading.toString(),
+            "side": side
+          },
+          success: function(result) {
+            $(".lefticon").addClass(result.left.flag);
+            $(".righticon").addClass(result.right.flag);
+            $("#streetsign").text(result.streetname);
+
+            if (result.left.message) {
+              $("#sidearrow").text(result.left.message);
+            } else if (result.right.message) {
+              $("#sidearrow").text(result.right.message);
+            }
+          },
+          failure: function(result) {
+            alert("aww, snap!");
           }
-        },
-        failure: function(result) {
-          alert("aww, snap!");
-        }
+        });
       });
     }
 
@@ -93,8 +99,8 @@
       alert(message);
     }
 
-    /* onclick handlers */
-    $(document).ready(function() {
+    $(function() { 
+      /* add onclick handlers */
       $(".lefticon").click(function() {
         $("#sidearrow").removeClass("arrowright").addClass("arrowleft");
       });
@@ -111,11 +117,13 @@
         var lat = $("#g-lat").val();
         var lng = $("#g-lng").val();
         var head = $("#g-head").val();
-        location.href = "detail.html?latitude=" + lat + "&longitude=" + lng + "&heading=" + head;
+        var side = $("#g-side").val();
+        location.href = "detail.html?latitude=" + lat + "&longitude=" + lng + "&heading=" + head + "&side=" + side;
       });
+        
+      /* geolocate and update design */
+      initVehicleFromGeoLocation(updateLoc, getAddress, cbFail); });
     });
-
-    $(document).ready(initVehicleFromGeoLocation(updateLoc, getAddress, cbFail));
   </script>
 </head>
 <body>
@@ -127,6 +135,7 @@
         <input type="hidden" id="g-lat" value="" />
         <input type="hidden" id="g-lng" value="" />
         <input type="hidden" id="g-head" value="" />
+        <input type="hidden" ide="g-side" value="" />
       </fieldset>
     </form>
   </div>
