@@ -18,7 +18,7 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
   <script type=text/javascript>
     function updateLoc(v) {
-      isSnowEmergency(v function(data) {
+      isSnowEmergency(v, function(data) {
         // is snow emergency
         $(".lefticon").addClass("snow");
         $(".righticon").addClass("snow");
@@ -78,7 +78,6 @@
           }
           var v = new Vehicle(position);
           updateLoc(v);
-          });
         }
       });
     }
