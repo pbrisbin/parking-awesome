@@ -3,7 +3,7 @@
 <head>
   <meta charset=utf-8>
   <title>Can Haz Parking?</title>
-  <meta name="viewport" content="width=380px;initial-scale:0.9" />
+  <meta name="viewport" content="width=340px" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link href="index.css" rel=stylesheet type=text/css>
   <link rel="apple-touch-icon" href="canpark.png" />
@@ -72,7 +72,6 @@
           if (results.length == 0) {
             return;
           }
-
           var position = {
             coords: {
               longitude: results[0].geometry.location.lng(),
@@ -108,8 +107,8 @@
       alert(message);
     }
 
-    $(function() { 
-      /* add onclick handlers */
+    /* onclick handlers */
+    $(document).ready(function() {
       $(".lefticon").click(function() {
         $("#sidearrow").removeClass("arrowright").addClass("arrowleft");
       });
@@ -121,18 +120,9 @@
       $("#streetsign").click(function() {
         getAddress("Please enter an address:");
       });
-
-      $("#sidearrow").click(function() {
-        var lat = $("#g-lat").val();
-        var lng = $("#g-lng").val();
-        var head = $("#g-head").val();
-        var side = $("#g-side").val();
-        location.href = "detail.html?latitude=" + lat + "&longitude=" + lng + "&heading=" + head + "&side=" + side;
-      });
-        
-      /* geolocate and update design */
-      initVehicleFromGeoLocation(updateLoc, getAddress, cbFail);
     });
+
+    $(document).ready(initVehicleFromGeoLocation(updateLoc, getAddress, cbFail));
   </script>
 </head>
 <body>
@@ -148,7 +138,7 @@
       </fieldset>
     </form>
   </div>
-  <div id="sidearrow" style="cursor: pointer;"></div>
+  <div id="sidearrow"></div>
   <div class="centerline" id="one"></div>
   <div class="centerline" id="two"></div>
   <div id="parkinginfo"></div>
