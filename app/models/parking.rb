@@ -60,6 +60,8 @@ class Parking
       end
       collector
     end
+    @primo_summary[:left] = {:until=>"Mon&nbsp;8:00am", :section=>"Gloucester St-Fairfield St", :limit=>"19h 20m", :street=>"Massachusetts Ave", :distance=>1056.0, :meter=>true, :side=>"N"} if(self.address.match(/massachusetts/i))
+    @primo_summary
   end
   
   def self.primo_summary(segment, heading)
