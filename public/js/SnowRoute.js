@@ -1,11 +1,9 @@
 /* look for snow route features at the given position; if features, call 
  * success(features), else call failure (optional).
  */
-function isSnowRoute(position, success, failure) {
-  var lng = position.coords.longitude;
-  var lat = position.coords.latitude;
+function isSnowRoute(vehicle, success, failure) {
 
-  civicAPI('bos_snow_routes', lng, lat, function(data) {
+  civicApiPoint('bos_snow_routes', vehicle.position, function(data) {
     if (data.features.length) {
       success(data.features);
     }

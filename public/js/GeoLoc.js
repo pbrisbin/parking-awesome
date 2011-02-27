@@ -1,35 +1,3 @@
-/* A better heading representation for our purposes */
-Direction = {
-  NULL      : 0, // no heading info
-  NORTH     : 1,
-  NORTHEAST : 2,
-  EAST      : 3,
-  SOUTHEAST : 4,
-  SOUTH     : 5,
-  SOUTHWEST : 6,
-  WEST      : 7,
-  NORTHWEST : 8
-}
-
-function Heading(heading) {
-  this.heading   = heading;
-  this.direction = directionFromBearing(this.heading);
-}
-
-Heading.prototype.toString = function() {
-  switch(this.direction) {
-    case Direction.NULL     : return "null";
-    case Direction.NORTH    : return "N";
-    case Direction.NORTHEAST: return "NE";
-    case Direction.EAST     : return "E";
-    case Direction.SOUTHEAST: return "SE";
-    case Direction.SOUTH    : return "S";
-    case Direction.SOUTHWEST: return "SW";
-    case Direction.WEST     : return "W";
-    case Direction.NORTHWEST: return "NW";
-  }
-}
-
 /* thanks http://www.movable-type.co.uk/scripts/latlong.html for the 
  * maths.
  *
@@ -45,6 +13,7 @@ function toDeg(rad) {
   return rad * (pi/180);
 }
 
+/* get the distance between two points */
 function getDistance(position1, position2) {
   var precision = 4;
   var R = 6371; // earth's radius
@@ -54,6 +23,9 @@ function getDistance(position1, position2) {
   var lat2 = toRad(position2.coords.latitude);
   var lon2 = toRad(position2.coords.longitude);
 
+  var dLat = lat2 - lat1;
+  var dLon = lon2 - lon1;
+
   var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
           Math.cos(lat1) * Math.cos(lat2) * 
           Math.sin(dLon/2) * Math.sin(dLon/2);
@@ -61,27 +33,10 @@ function getDistance(position1, position2) {
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   var d = R * c;
 
-  return d.toPrecisionFixed(precision);
+  return Number(d.toFixed(precision));
 }
 
-function closestPosition(position, positions) {
-  var p, d;
-  var min = null;
-  var closest;
-
-  for (i in positions) {
-    p = positions[i];
-    d = getDistance(position, p);
-
-    if (!min || d < min) {
-      min     = d;
-      closest = p;
-    }
-  }
-
-  return closest;
-}
-
+/* calculate a heading given two positions */
 function headingFromPositions(position1, position2) {
   var lat1 = toRad(position1.coords.latitude);
   var lat2 = toRad(position2.coords.latitude);
@@ -94,6 +49,7 @@ function headingFromPositions(position1, position2) {
   return new Heading((toDeg(brng) + 360) % 360);
 }
 
+/* return the direction, give the Bearing */
 function directionFromBearing(heading) {
   /* a helper */
   function near(heading, degree) {
@@ -120,16 +76,4 @@ function directionFromBearing(heading) {
 
   /* impossible, but oh well */
   return Direciton.NULL;
-}
-
-/* get location data. call success(position) on OK, error on error, and 
- * unsupported on the special unsupported error case.
- */
-function getLocation(success, error, unsupported) {
-  if (!navigator.geolocation) {
-    unsupported;
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(success, error);
 }
