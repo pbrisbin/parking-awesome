@@ -34,6 +34,7 @@ class StreetCleaning
     if(ct[:right])
       ret_val[:right] = {:flag => 'noparking', :message => ct[:right].join(' ')}   if StreetCleaning.does_day_apply(StreetCleaning.day(ct[:left].first), StreetCleaning.weeks(ct[:left][1])) rescue nil
     end
+
     ret_val
   end
   
