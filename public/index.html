@@ -85,10 +85,19 @@
       alert(message);
     }
 
-    $("#dialog-form").keyup(function(e) {
-      if (e.keyCode == 13) {
-        $("#dialog-form").dialog("close");
-      }
+    /* onclick handlers */
+    $(document).ready(function() {
+      $(".lefticon").click(function() {
+        $("#sidearrow").removeClass("arrowright").addClass("arrowleft");
+      });
+
+      $(".righticon").click(function() {
+        $("#sidearrow").removeClass("arrowleft").addClass("arrowright");
+      });
+
+      $("#streetsign").click(function() {
+        getAddress();
+      });
     });
 
     $(document).ready(initVehicleFromGeoLocation(updateLoc, getAddress, cbFail));
@@ -98,7 +107,7 @@
   <div id="dialog-form">
     <form>
       <fieldset>
-        <label name="address" for="addressInput">Address</label>
+        <label name="address" for="addressInput">Geolocation failed. Please enter your address:</label>
         <input type="text" id="addressInput" class="text ui-widget-content ui-corner-all" />
       </fieldset>
     </form>
