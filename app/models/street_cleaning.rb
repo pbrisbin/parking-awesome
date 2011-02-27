@@ -8,6 +8,7 @@ class StreetCleaning
     attributes.each do |attribute, value|
       self.send("#{attribute}=".to_sym, value)
     end
+    @api_call = BostonStreetScraper::Scraper.new(self.street_name).attributes if valid?
   end
   
 end
