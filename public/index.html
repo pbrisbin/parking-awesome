@@ -23,7 +23,7 @@
         data: {
           "latitude": v.latitude,
           "longitude": v.longitude,
-          "heading": v.heading.heading
+          "heading": v.heading.toString()
         },
         success: function(result) {
           $("#lefticon").addClass(result.left.flag);
