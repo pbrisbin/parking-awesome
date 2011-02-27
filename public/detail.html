@@ -10,9 +10,13 @@
   <link href="index.css" rel=stylesheet type=text/css>
   <link href="detail.css" rel=stylesheet type=text/css></head>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <script>"js/CivicAPI.js"</script>
+  <script>"js/GeoLoc.js"</script>
+  <script>"js/Vehicle.js"</script>
+  <script>"js/SnowRoute.js"</script>
 <body>
-	<div id="left" class="side"><span id="lefttext" class="text">You can park here if you have a permit.</span></div>
-	<div id="right" class="side"><span id="righttext" class="text">You can't park here because it is a snow emergency.</span></div>
+	<div id="left" class="side"><span id="lefttext" class="text">fetching detail...</span></div>
+	<div id="right" class="side"><span id="righttext" class="text">fetching detail...</span></div>
 	<div class="centerline" id="one"></div>
 	<div class="centerline" id="two"></div>
 	<div class="button" id="fineinfo"><script>$("how much might it cost?").button();</script></div>
@@ -44,33 +48,54 @@
                 var heading   = gup('heading');
 
                 if (!latitude || !longitude) {
-                    // handle this?
+                    // todo:
+                    alert("we /would/ ask you to give an address or present a default details page..."
                     return;
                 }
 
-                $.ajax({
-                    url: "parking_spots",
-                    data: {
-                        "latitude":  gup('latitude'),
-                        "longitude": gup('longitude'),
-                        "heading":   gup('heading')
-                    },
-                    success: function(result) {
-                        if (result.left.message) {
-                            $("#lefttext").text(result.left.message);
-                        } 
-                            
-                        if (result.right.message) {
-                            $("#righttext").text(result.right.message);
-                        }
-                    },
-                    failure: function(result) {
-                        alert("aww, snap!");
+                var p = {
+                    coords: {
+                        longitude: longitude,
+                        latitude:  latitude,
+                        heading:   0 // just check snow
                     }
+                }
+
+                var v = new Vehicle(p);
+
+                isSnowEmergencty(v, function(data) {
+                    // yes, update message
+                    var msg = "no parking due to snow emergency."
+                    $("#lefttext").text(msg);
+                },
+                function (data) {
+                    // no, check for other situations
+                    $.ajax({
+                        url: "parking_spots",
+                        data: {
+                            "latitude":  gup('latitude'),
+                            "longitude": gup('longitude'),
+                            "heading":   gup('heading')
+                        },
+                        success: function(result) {
+                            if (result.left.message) {
+                                $("#lefttext").text(result.left.message);
+                            } 
+                                
+                            if (result.right.message) {
+                                $("#righttext").text(result.right.message);
+                            }
+                        },
+                        failure: function(result) {
+                            alert("aww, snap!");
+                        }
+                    });
                 });
             }
 
-            $(function() { updateDesign(); });
+            $(function() { 
+                updateDesign();
+            });
         </script>
 </body>
 </html>
