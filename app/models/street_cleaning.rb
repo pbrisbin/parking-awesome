@@ -24,6 +24,19 @@ class StreetCleaning
     first_to_last > StreetCleaning.distance_between(self.latitude, self.longitude, segments[0].first) && first_to_last > StreetCleaning.distance_between(self.latitude, self.longitude, segments[1].first)
   end
   
+  def summarize
+    ct = cleaning_times
+    ret_val = {}
+    
+    if(ct[:left])
+      ret_val[:left] = {:flag => 'noparking', :message => ct[:left].join(' ')}  if StreetCleaning.does_day_apply(StreetCleaning.day(ct[:left].first), StreetCleaning.weeks(ct[:left][1])) rescue nil
+    end
+    if(ct[:right])
+      ret_val[:right] = {:flag => 'noparking', :message => ct[:right].join(' ')}   if StreetCleaning.does_day_apply(StreetCleaning.day(ct[:left].first), StreetCleaning.weeks(ct[:left][1])) rescue nil
+    end
+    ret_val
+  end
+  
   def cleaning_times
     result = {}
     @api_call.each do |section|
@@ -65,6 +78,10 @@ class StreetCleaning
     return nil if split.count < 2
     ccount = split.count.to_s.to_i
     split[0, ccount -1]
+  end
+  
+  def summary
+    
   end
   private
   
