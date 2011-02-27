@@ -13,9 +13,16 @@ class ParkingTest < Test::Unit::TestCase
   end
   
   def test_parking_as_json
-    expected = {"left"=>{:flag=>"no", :message=>"bad idea"},
+    expected = {"streetname" => "Huntington Ave", "left"=>{:flag=>"no", :message=>"bad idea"},
      "right"=>{:flag=>"no", :message=>"bad idea"}}
     assert_equal expected, Parking.new(:address => ADDRESS, :heading => 'N').as_json
+  end
+  
+  def test_initializer_with_no_address
+    setup_geocoder_fakeweb
+    p = Parking.new(:latitude => '42.348672', :longitude => '-71.085019', :heading => 'N')
+    assert_equal "302 Newbury St", p.address
+    
   end
   
   def test_resolve_direction
@@ -46,22 +53,24 @@ class ParkingTest < Test::Unit::TestCase
   end
   
   def test_primo_summarize
-    expected = { :left => {:street=>"Ring Rd",
-       :meter=>false,
-       :limit=>nil,
-       :side=>"W",
-       :distance=>100,
+    expected = {:left=>
+      {:side=>"NW",
+       :bad_idea=>true,
        :until=>{},
-       :section=>"Boylston St-Huntington Ave",
-       :bad_idea=>true}, 
-     :right => {:street=>"Ring Rd",
-       :meter=>false,
+       :section=>"Mass Ave-Harcourt St",
        :limit=>nil,
-       :side=>"E",
-       :distance=>300,
+       :meter=>false,
+       :distance=>700,
+       :street=>"Huntington Ave"},
+     :right=>
+      {:side=>"SE",
+       :bad_idea=>true,
        :until=>{},
-       :section=>"Boylston St-Huntington Ave",
-       :bad_idea=>true} }
+       :section=>"Mass Ave-Harcourt St",
+       :limit=>nil,
+       :meter=>false,
+       :distance=>900,
+       :street=>"Huntington Ave"}}
     assert_equal expected, Parking.new(:address => ADDRESS, :heading => 'N').primo_summary
   end
   

@@ -1,15 +1,18 @@
 class Parking
   DIRECTIONS = {'N' => 0, 'NE' => 45, 'E' => 90, 'SE' => 135, 'S' => 180, 'SW' => 225, 'W' => 270, 'NW' => 315}
-  attr_accessor :address, :heading, :primo_response
+  attr_accessor :address, :heading, :primo_response, :latitude, :longitude
   
   def initialize(attributes={})
     attributes.each do |attribute, value|
       self.send("#{attribute}=", value)
     end
+    if self.address.blank?
+      @geocoded = Geocoder.search(self.latitude.to_f,self.longitude.to_f)
+      self.address = @geocoded.first.data['address_components'].find_all{|j| j['types'].first== 'street_number' || j['types'].first == 'route' }.collect { |h| h['short_name']}.join(' ')
+    end
     @primo_response = PrimoParking.results_for(address)
   end
-  
-  
+    
   def as_json(options={})
     { "streetname" => geocoded_street,
       "left" => left, 
@@ -18,7 +21,7 @@ class Parking
   
   def self.resolve_direction(heading, side)
     heading = DIRECTIONS[heading]
-    side = DIRECTIONS[side]
+    side =    DIRECTIONS[side]
     return nil if side.blank? || heading.blank?
     offset = (side - heading) % 360
     
@@ -57,12 +60,16 @@ class Parking
 
   private 
   # Helper methods to integrate with Geocoder
+  def self.geocode_street(geocoded_address)
+    (geocoded_address.first.data['address_components'].find_all{|h| h['types'].first == 'route' rescue false}).first['short_name'] rescue nil
+  end
+  
   def geocoded_address
-    Geocoder.search(self.address)
+    @geocoded||= Geocoder.search(self.address)
   end
   
   def geocoded_street
-    geocoded_address.first.data['address_components'].first['short_name'] rescue nil
+    Parking.geocode_street(geocoded_address)# rescue nil
   end
   
   def geocoded_street_regex
