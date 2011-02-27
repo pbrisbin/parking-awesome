@@ -43,11 +43,12 @@ class PrimoParking
     end
   end
   
-  def self.parse_descriptor(attributes)    
+  def self.parse_descriptor(attributes)
     ok = {:flag => 'freeparking', :message => 'you can haz'}
     return ok if attributes.blank?
-    return {:flag => 'meter', :message => "until #{attributes[:until]}"} if attributes[:meter]
     return {:flag => 'noparking', :message => 'bad idea'} if attributes[:bad_idea]
+
+    return {:flag => 'meter', :message => "until #{attributes[:until]}"} if attributes[:meter]
     ok
   end
   

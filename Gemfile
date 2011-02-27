@@ -9,4 +9,5 @@ gem 'geocoder'
 
 group :development, :test do
 	gem 'fakeweb'
+	gem 'timecop'
 end

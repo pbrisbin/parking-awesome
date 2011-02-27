@@ -132,5 +132,28 @@ class StreetCleaningTest < Test::Unit::TestCase
   end
 
   
+  
+  
+#  [["Everyday", "12:01am - 7am"], ["Everyday", "12:01am - 7am"], ["2nd 4th Wed", "12pm - 4pm", "Apr 13"], ["1st 3rd Wed", "12pm - 4pm", "Apr 6"]]
+  
+  def test_day_of_week
+    assert_equal nil, StreetCleaning.day("Everyday")
+    assert_equal "Wed", StreetCleaning.day("2nd 4th Wed")
+    assert_equal "Wed", StreetCleaning.day("1st 3rd Wed")
+  end
+  
+  def test_week_numbers
+    assert_equal nil, StreetCleaning.day("Everyday")
+    assert_equal ["2nd", "4th"], StreetCleaning.weeks("2nd 4th Wed")
+  end
+  
+  def test_does_day_apply
+    #assert_equal true, StreetCleaning.does_time_apply("Everyday")
+  end
+  
+  
+  def test_does_time_apply
+    
+  end
 
 end

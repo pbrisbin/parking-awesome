@@ -12,7 +12,8 @@ class Parking
     return unless valid?
     if self.address.blank?
       @geocoded = Geocoder.search(self.latitude.to_f,self.longitude.to_f)
-      self.address = @geocoded.first.data['address_components'].find_all{|j| j['types'].first== 'street_number' || j['types'].first == 'route' }.collect { |h| h['short_name']}.join(' ')
+      self.address = @geocoded.first.data['address_components'].find_all{|j| j['types'].first== 'street_number' || j['types'].first == 'route' }.collect { |h| h['short_name']}.join(' ') 
+
     end
     @primo_response = PrimoParking.results_for(address)
   end
@@ -28,8 +29,8 @@ class Parking
   end
   
   def self.resolve_direction(heading, side)
-    heading = DIRECTIONS[heading]
-    side =    DIRECTIONS[side]
+    heading = DIRECTIONS[heading] rescue 0 
+    side =    DIRECTIONS[side] rescue 0
     return nil if side.blank? || heading.blank?
     offset = (side - heading) % 360
     
@@ -50,6 +51,7 @@ class Parking
   # Integrate Parking Heading Information with Primo Summary
   
   def primo_summary
+    
     return @primo_summary if @primo_summary
     collection = @primo_response.collect {|pr| Parking.primo_summary(pr, self.heading)}
     collection.reject! { |h| h[1].blank?} # remove any without direction
