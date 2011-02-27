@@ -120,6 +120,14 @@
       $("#streetsign").click(function() {
         getAddress("Please enter an address:");
       });
+
+      $("#sidearrow").click(function() {
+        var lat = $("#g-lat").val();
+        var lng = $("#g-lng").val();
+        var head = $("#g-head").val();
+        var side = $("#g-side").val();
+        location.href = "detail.html?latitude=" + lat + "&longitude=" + lng + "&heading=" + head + "&side=" + side;
+      });
     });
 
     $(document).ready(initVehicleFromGeoLocation(updateLoc, getAddress, cbFail));
