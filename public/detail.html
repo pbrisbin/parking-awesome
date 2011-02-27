@@ -10,10 +10,10 @@
   <link href="index.css" rel=stylesheet type=text/css>
   <link href="detail.css" rel=stylesheet type=text/css></head>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-  <script>"js/CivicAPI.js"</script>
-  <script>"js/GeoLoc.js"</script>
-  <script>"js/Vehicle.js"</script>
-  <script>"js/SnowRoute.js"</script>
+  <script src="js/CivicAPI.js"></script>
+  <script src="js/GeoLoc.js"></script>
+  <script src="js/Vehicle.js"></script>
+  <script src="js/SnowRoute.js"></script>
 <body>
 	<div id="left" class="side"><span id="lefttext" class="text">fetching detail...</span></div>
 	<div id="right" class="side"><span id="righttext" class="text">fetching detail...</span></div>
@@ -49,7 +49,7 @@
 
                 if (!latitude || !longitude) {
                     // todo:
-                    alert("we /would/ ask you to give an address or present a default details page..."
+                    alert("we /would/ ask you to give an address or present a default details page...");
                     return;
                 }
 
@@ -63,19 +63,20 @@
 
                 var v = new Vehicle(p);
 
-                isSnowEmergencty(v, function(data) {
-                    // yes, update message
+                isSnowEmergencty(v, function(x) {
+                    // yes
                     var msg = "no parking due to snow emergency."
                     $("#lefttext").text(msg);
                 },
-                function (data) {
-                    // no, check for other situations
+                function (y) {
+                    // no, check for other stuffs
                     $.ajax({
                         url: "parking_spots",
                         data: {
                             "latitude":  gup('latitude'),
                             "longitude": gup('longitude'),
-                            "heading":   gup('heading')
+                            "heading":   gup('heading'),
+                            "evens":     gup('side')
                         },
                         success: function(result) {
                             if (result.left.message) {
