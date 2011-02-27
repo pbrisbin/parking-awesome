@@ -5,7 +5,7 @@ function optional(falure) { if (typeof(failure) == 'undefined') return; else fai
 /* note: the failure callback is optional */
 function isSnowEmergency(vehicle, success, failure) {
     var dataset = 'bos_snow_routes';
-    var url     = '/snow_emergency';
+    var url     = 'snow_emergency';
 
     civicApiPoint(dataset, vehicle.position, function(data) {
         // it is a snow route
