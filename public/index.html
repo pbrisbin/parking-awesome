@@ -9,6 +9,7 @@
   <link href="index.css" rel=stylesheet type=text/css>
   <link rel="apple-touch-icon" href="canpark.png" />
   <link rel="SHORTCUT ICON" href="canpark.ico" />
+  <script type="text/javascript" src="js/CivicAPI.js"></script>
   <script type="text/javascript" src="js/GeoLoc.js"></script>
   <script type="text/javascript" src="js/Vehicle.js"></script>
   <script type="text/javascript" src="js/SnowRoute.js"></script>
@@ -26,8 +27,8 @@
           "heading": v.heading.toString()
         },
         success: function(result) {
-          $("#lefticon").addClass(result.left.flag);
-          $("#righticon").addClass(result.right.flag);
+          $(".lefticon").addClass(result.left.flag);
+          $(".righticon").addClass(result.right.flag);
           $("#streetsign").text(result.streetname);
 
           if (result.left.message) {
@@ -58,6 +59,10 @@
           }
           var v = new Vehicle(position);
           updateLoc(v);
+          isSnowEmergency(v, function() {
+            $(".lefticon").addClass("snow");
+            $(".righticon").addClass("snow");
+          });
         }
       });
     }
