@@ -38,17 +38,21 @@
             }
 
             function updateDesign() {
+                var latitude  = gup('latitude');
+                var longitude = gup('longitude');
+                var heading   = gup('heading');
+
                 if (!latitude || !longitude) {
-                    // todo: handle this case?
+                    // handle this?
                     return;
                 }
 
                 $.ajax({
                     url: "parking_spots",
                     data: {
-                        "latitude":  gup('latitude');
-                        "longitude": gup('longitude');
-                        "heading":   gpu('heading');
+                        "latitude":  gup('latitude'),
+                        "longitude": gup('longitude'),
+                        "heading":   gup('heading')
                     },
                     success: function(result) {
                         if (result.left.message) {
