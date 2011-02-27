@@ -44,7 +44,8 @@
                 var heading   = gup('heading');
 
                 if (!latitude || !longitude) {
-                    // handle this?
+                    // todo:
+                    alert("we /would/ ask you to give an address or present a default details page..."
                     return;
                 }
 
@@ -70,7 +71,9 @@
                 });
             }
 
-            $(function() { updateDesign(); });
+            $(function() { 
+                updateDesign();
+            });
         </script>
 </body>
 </html>
