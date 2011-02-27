@@ -17,9 +17,9 @@
       $.ajax({
         url: "parking_spots",
         data: {
-          "latitude": String(v.latitude),
-          "longitude": String(v.longitude),
-          "heading": String(v.heading.heading)
+          "latitude": v.latitude,
+          "longitude": v.longitude,
+          "heading": v.heading.heading
         },
         success: function(result) {
           $("#lefticon").addClass(result.left.flag);
@@ -49,7 +49,7 @@
             coords: {
               longitude: results[0].geometry.location.lng(),
               latitude: results[0].geometry.location.lat(),
-              heading: '180'
+              heading: 0
             }
           }
           var v = new Vehicle(position);
