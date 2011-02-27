@@ -46,6 +46,10 @@ def setup_geocoder_fakeweb
     
     FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Commonwealth+at+newbury%2C+Boston%2C+MA",
       :body => File.open('test/fixtures/comm_newbury.json').read
+      
+      
+      FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Brookline+at+newbury%2C+Boston%2C+MA",
+        :body => File.open('test/fixtures/brook_newbury.json').read
     
 end
 
