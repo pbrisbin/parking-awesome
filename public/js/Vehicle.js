@@ -18,6 +18,10 @@ SideOfVehicle = { // {{{
 } // }}}
 
 function oppositeSide(side) { // {{{
+    if (typeof(side) == "undefined") {
+        return SideOfVehicle.Left;
+    }
+
     switch (side) {
         case SideOfVehicle.Left:  return SideOfVehicle.Right;
         case SideOfVehicle.Right: return SideOfVehicle.Left;
@@ -25,7 +29,7 @@ function oppositeSide(side) { // {{{
 } // }}}
 
 function Heading(heading) { // {{{
-    this.heading   = heading;
+    this.heading   = heading; // may be null
     this.direction = directionFromBearing(this.heading);
 } // }}}
 
@@ -63,9 +67,9 @@ function initVehicleFromGeoLocation(success, error, unsupported) { // {{{
 
 Vehicle.prototype.toString = function() { // {{{
     return "{ vehicle: { " 
-        + this.longitude + ", " 
-        + this.latitude + " }, " 
-        + this.heading.toString() + " }";
+        + "longitude: " + this.longitude + ", " 
+        + "latitude: "  + this.latitude + ", " 
+        + "heading: "   + this.heading.toString() + " } }";
 } // }}}
 
 Vehicle.prototype.sideOfVehicle = function(position) { // {{{
@@ -81,32 +85,32 @@ Vehicle.prototype.sideOfVehicle = function(position) { // {{{
 
     switch(this.heading.direction) {
         /* fall back is just a guess */
-        case Direction.NULL:  return SideOfVehicle.Right;
+        case Direction.NULL: return SideOfVehicle.Right;
 
-                              /* leave these as-is */
+        /* leave these as-is */
         case Direction.NORTH:
         case Direction.SOUTH:
         case Direction.EAST:
         case Direction.WEST:
-                              adjustedDirection = this.heading.direction;
+            adjustedDirection = this.heading.direction;
 
-                              /* reset from NW to N or W depending on the value of 
-                               * strongerEastWest */
+        /* reset from NW to N or W depending on the value of 
+         * strongerEastWest */
         case Direction.NORTHEAST: 
-                              direction = strongerEastWest ? Direction.NORTH : Direction.EAST;
-                              break;
+            direction = strongerEastWest ? Direction.NORTH : Direction.EAST;
+            break;
 
         case Direction.SOUTHEAST: 
-                              direction = strongerEastWest ? Direction.SOUTH : Direction.EAST;
-                              break;
+            direction = strongerEastWest ? Direction.SOUTH : Direction.EAST;
+            break;
 
         case Direction.SOUTHWEST: 
-                              direction = strongerEastWest ? Direction.SOUTH : Direction.WEST;
-                              break;
+            direction = strongerEastWest ? Direction.SOUTH : Direction.WEST;
+            break;
 
         case Direction.NORTHWEST: 
-                              direction = strongerEastWest ? Direction.NORTH : Direction.WEST;
-                              break;
+            direction = strongerEastWest ? Direction.NORTH : Direction.WEST;
+            break;
     }
 
     switch(adjustedDirection) {
@@ -119,6 +123,7 @@ Vehicle.prototype.sideOfVehicle = function(position) { // {{{
 
 Vehicle.prototype.sideOfEvens = function(callback) { // {{{
     var vehicle = this;
+
     var feature;
     var addrPos;
     var addrNum;
@@ -132,7 +137,6 @@ Vehicle.prototype.sideOfEvens = function(callback) { // {{{
 
     civicApiBox("bos_addresses", this.position, 0.005, function(data) {
         feature = nearestFeature(vehicle.position, data.features);
-
         addrNum = parseNum(feature.properties.properties.full_addre);
         addrPos = {
             coords: {
