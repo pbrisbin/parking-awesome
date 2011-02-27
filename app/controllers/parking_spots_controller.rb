@@ -7,4 +7,6 @@ class ParkingSpotsController < ApplicationController
       render :json => p.to_json, :status => :unprocessable_entity      
     end
   end
+  
+  
 end
