@@ -25,6 +25,11 @@ def setup_geocoder_fakeweb
       :body => File.open('test/fixtures/huntington_ave_boston.json').read
 end
 
+def setup_street_cleaning_fakeweb
+  FakeWeb.register_uri :get, "http://www.cityofboston.gov/publicworks/sweeping/?streetname=NEWBURY&Neighborhood=",
+    :body => File.open('test/fixtures/newbury.html').read
+end
+
 class ActiveSupport::TestCase
   
 end

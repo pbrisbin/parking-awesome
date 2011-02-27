@@ -30,7 +30,7 @@ GEM
     activesupport (3.0.0)
     arel (1.0.1)
       activesupport (~> 3.0.0)
-    boston-street-scraper (0.0.1)
+    boston-street-scraper (0.0.3)
       httparty
       nokogiri
     builder (2.1.2)
