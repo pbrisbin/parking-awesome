@@ -4,7 +4,7 @@ require 'fakeweb'
 class StreetCleaningTest < Test::Unit::TestCase
 
   def test_flunk
-    #flunk
+    flunk
   end
 
 end
