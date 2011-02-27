@@ -1,0 +1,54 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "intersection" ],
+    "formatted_address": "Brookline Ave & Newbury St, Boston, MA 02215, USA",
+    "address_components": [ {
+      "long_name": "Brookline Ave",
+      "short_name": "Brookline Ave",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "administrative_area_level_3", "political" ]
+    }, {
+      "long_name": "Suffolk",
+      "short_name": "Suffolk",
+      "types": [ "administrative_area_level_2", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    }, {
+      "long_name": "02215",
+      "short_name": "02215",
+      "types": [ "postal_code" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3482650,
+        "lng": -71.0974229
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3451174,
+          "lng": -71.1005705
+        },
+        "northeast": {
+          "lat": 42.3514126,
+          "lng": -71.0942753
+        }
+      }
+    },
+    "partial_match": true
+  } ]
+}

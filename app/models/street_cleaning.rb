@@ -24,6 +24,23 @@ class StreetCleaning
     first_to_last > StreetCleaning.distance_between(self.latitude, self.longitude, segments[0].first) && first_to_last > StreetCleaning.distance_between(self.latitude, self.longitude, segments[1].first)
   end
   
+  def cleaning_times
+    result = {}
+    @api_call.each do |section|
+      if in_range? section[:section]
+        if ! section[:side].strip.match(/odd|even/i)
+          return {:left => section[:schedule], :right => section[:schedule]}
+        elsif section[:side].match(/even/i)
+          side = self.side_of_evens.match(/left/i) ? :left : :right
+          result[side] = section[:schedule] if result[side].blank? 
+        else
+          side = self.side_of_evens.match(/left/i) ? :right : :left
+          result[side] = section[:schedule] if result[side].blank?        
+        end
+      end
+    end
+    result
+  end
   private
   
   def self.geometry_lat_lng(geometry)

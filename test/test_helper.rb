@@ -44,18 +44,27 @@ def setup_geocoder_fakeweb
   FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Kenmore+St+at+newbury%2C+Boston%2C+MA",
     :body => File.open('test/fixtures/kenmore_at_newbury.json').read
     
-    FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Commonwealth+at+newbury%2C+Boston%2C+MA",
-      :body => File.open('test/fixtures/comm_newbury.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Commonwealth+at+newbury%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/comm_newbury.json').read
       
-      
-      FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Brookline+at+newbury%2C+Boston%2C+MA",
-        :body => File.open('test/fixtures/brook_newbury.json').read
+  FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Brookline+at+newbury%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/brook_newbury.json').read
     
+    
+   FakeWeb.register_uri :get, "http://maps.google.com/maps/api/geocode/json?sensor=false&address=Brookline+Ave+at+newburyodd%2C+Boston%2C+MA",
+    :body => File.open('test/fixtures/brookline_fixture.json').read
 end
 
 def setup_street_cleaning_fakeweb
   FakeWeb.register_uri :get, "http://www.cityofboston.gov/publicworks/sweeping/?streetname=NEWBURY&Neighborhood=",
     :body => File.open('test/fixtures/newbury.html').read
+    
+  FakeWeb.register_uri :get, "http://www.cityofboston.gov/publicworks/sweeping/?streetname=NEWBURYODD&Neighborhood=",
+    :body => File.open('test/fixtures/newbury_odd.html').read
+    
+  FakeWeb.register_uri :get, "http://www.cityofboston.gov/publicworks/sweeping/?streetname=NEWBURYEVEN&Neighborhood=",
+    :body => File.open('test/fixtures/newbury_even.html').read
+    
 end
 
 class ActiveSupport::TestCase
