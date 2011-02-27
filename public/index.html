@@ -67,7 +67,11 @@
       });
     }
 
-    function getAddress() {
+    function getAddress(msg) {
+      if (msg) {
+        $("label").text(msg);
+      }
+
       $("#dialog-form").dialog({
         autoOpen: true,
         modal: true,
@@ -96,7 +100,7 @@
       });
 
       $("#streetsign").click(function() {
-        getAddress();
+        getAddress("Please enter an address:");
       });
     });
 
