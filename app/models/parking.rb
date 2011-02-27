@@ -1,4 +1,7 @@
 class Parking
+  include ActiveModel::Validations
+  validates :heading, :presence => true
+  validate :address_or_lat_lon
   DIRECTIONS = {'N' => 0, 'NE' => 45, 'E' => 90, 'SE' => 135, 'S' => 180, 'SW' => 225, 'W' => 270, 'NW' => 315}
   attr_accessor :address, :heading, :primo_response, :latitude, :longitude
   
@@ -6,6 +9,7 @@ class Parking
     attributes.each do |attribute, value|
       self.send("#{attribute}=", value)
     end
+    return unless valid?
     if self.address.blank?
       @geocoded = Geocoder.search(self.latitude.to_f,self.longitude.to_f)
       self.address = @geocoded.first.data['address_components'].find_all{|j| j['types'].first== 'street_number' || j['types'].first == 'route' }.collect { |h| h['short_name']}.join(' ')
@@ -14,9 +18,13 @@ class Parking
   end
     
   def as_json(options={})
-    { "streetname" => geocoded_street,
-      "left" => left, 
-      "right" => right }
+    if valid?
+      { "streetname" => geocoded_street,
+        "left" => left, 
+        "right" => right }
+    else
+      {'errors' => self.errors.as_json}
+    end
   end
   
   def self.resolve_direction(heading, side)
@@ -59,6 +67,13 @@ class Parking
   end  
 
   private 
+  
+  def address_or_lat_lon
+    if((self.latitude.blank? || self.longitude.blank?) && self.address.blank?)
+      self.errors.add(:latitude, 'cannot be blank')
+      self.errors.add(:longitude, 'cannot be blank')
+    end
+  end
   # Helper methods to integrate with Geocoder
   def self.geocode_street(geocoded_address)
     (geocoded_address.first.data['address_components'].find_all{|h| h['types'].first == 'route' rescue false}).first['short_name'] rescue nil

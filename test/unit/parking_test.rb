@@ -22,7 +22,33 @@ class ParkingTest < Test::Unit::TestCase
     setup_geocoder_fakeweb
     p = Parking.new(:latitude => '42.348672', :longitude => '-71.085019', :heading => 'N')
     assert_equal "302 Newbury St", p.address
-    
+    assert_equal true, p.valid?
+  end
+
+  def test_initializer_with_address
+    setup_geocoder_fakeweb
+    p = Parking.new(:address => '302 Newbury St', :heading => 'N')
+    assert_equal "302 Newbury St", p.address
+    assert_equal true, p.valid?
+  end
+  
+  def test_invalid_to_json
+    p = Parking.new
+    expected = {"errors"=>
+      {"latitude"=>"cannot be blank",
+       "heading"=>"can't be blank",
+       "longitude"=>"cannot be blank"}}
+    assert_equal expected, ActiveSupport::JSON.decode(p.to_json)
+  end
+  
+
+  
+  def test_initializer_with_no_params
+    p = Parking.new
+    assert_equal false, p.valid?
+    assert_equal "cannot be blank", p.errors[:latitude].first
+    assert_equal "cannot be blank", p.errors[:longitude].first 
+    assert_equal "can't be blank", p.errors[:heading].first
   end
   
   def test_resolve_direction
