@@ -16,25 +16,20 @@ class StreetCleaning
   def in_range?(range)
     segments = range.split('-').collect {|h| Geocoder.search("#{h.strip} at #{self.street_name}, Boston, MA") }
 
-      lat_lng = StreetCleaning.geometry_lat_lng(segments.first[0].geometry)
+    lat_lng = StreetCleaning.geometry_lat_lng(segments.first[0].geometry)
     lat = lat_lng['lat']
     lng = lat_lng['lng']
     
     first_to_last = StreetCleaning.distance_between(lat, lng, segments[1].first)
-    
     first_to_last > StreetCleaning.distance_between(self.latitude, self.longitude, segments[0].first) && first_to_last > StreetCleaning.distance_between(self.latitude, self.longitude, segments[1].first)
   end
   
   private
   
   def self.geometry_lat_lng(geometry)
-    if geometry.is_a?(Hash)
-      geometry['location']
-    else
-      puts "on the reg"
-      geometry['bounds']['northeast']
-    end
+    geometry['location']
   end
+  
   def self.distance_between(lat, lng, point)
     lat_lng = geometry_lat_lng(point.geometry)
     lat2 = lat_lng['lat']
