@@ -94,6 +94,6 @@ class StreetCleaning
     lat_lng = geometry_lat_lng(point.geometry)
     lat2 = lat_lng['lat']
     lng2 = lat_lng['lng']
-    Geocoder::Calculations.distance_between(lat, lng, lat2, lng2)
+    Geocoder::Calculations.distance_between(lat, lng, lat2, lng2) rescue 0
   end
 end
