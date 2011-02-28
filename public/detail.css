@@ -6,6 +6,12 @@ body {
 	font-size: 2em;
 }
 
+a {
+	font-family: 'Cabin', arial, serif; 
+	color:white;
+	text-decoration:none;
+}
+
 .side {
 	width: 42%;
 	padding: 10px 10px;
@@ -19,7 +25,7 @@ body {
 	float:right;
 }
 #signcontainer {
-	height:200px;
+	height:300px;
 }
 
 .streetsign {
@@ -44,21 +50,28 @@ body {
 	font-family: 'Cabin', arial, serif;
 }
 
-#moreinfo {
-	position: relative;
-	top:40px;
+#back {
+	position:relative;
+	top:95px;
+	margin-top:95px;
 }
 
-#address {
+#address{
 	position: relative;
-	top:70px;
-	left:0px;
-	right:0px;
-	margin-top:70px;
+	top:120px;
+	margin-top:120px;
+}
+
+#moreinfo {
+	position: relative;
+	top:145px;
+	margin-top:145px;
 }
 
 #streetsignpost{
-	height:100%;
+	height:300px;
+	top:0px;
+	margin-top:0px;
 }
 
 #signcontainer {
