@@ -73,7 +73,7 @@ Vehicle.prototype.toString = function() { // {{{
 } // }}}
 
 Vehicle.prototype.sideOfVehicle = function(position) { // {{{
-    var adjustedDirection = null; 
+    var adjustedDirection;
     var diffLong = this.longitude - position.coords.longitude;
     var diffLat  = this.latitude  - position.coords.latitude;
 
@@ -116,7 +116,7 @@ Vehicle.prototype.sideOfVehicle = function(position) { // {{{
     switch(adjustedDirection) {
         case Direction.NORTH: return eastWest   == Direction.WEST  ? SideOfVehicle.Left : SideOfVehicle.Right;
         case Direction.SOUTH: return eastWest   == Direction.EAST  ? SideOfVehicle.Left : SideOfVehicle.Right;
-        case Direction.EAST:  return northSouth == Direction.SOUTH ? SideOfVehicle.Left : SideOfVehicle.Right;
+        case Direction.EAST:  return northSouth == Direction.NORTH ? SideOfVehicle.Left : SideOfVehicle.Right;
         case Direction.WEST:  return northSouth == Direction.SOUTH ? SideOfVehicle.Left : SideOfVehicle.Right;
     }
 } // }}}
