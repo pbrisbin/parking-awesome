@@ -18,7 +18,7 @@ SideOfVehicle = { // {{{
 } // }}}
 
 function oppositeSide(side) { // {{{
-    if (typeof(side) == "undefined") {
+    if (typeof side == 'undefined') {
         // things default right, so opposite should default left
         return SideOfVehicle.Left;
     }
