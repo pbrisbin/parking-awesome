@@ -1,6 +1,6 @@
 // if the function is undefined, just return, else call it. allows for 
 // optional callbacks in other functions
-function optional(failure) { if (!failure) return; else failure(); }
+function optional(failure) { if (typeof failure == 'function') failure(); else return; }
 
 /* note: the failure callback is optional */
 function isSnowEmergency(vehicle, success, failure) {
