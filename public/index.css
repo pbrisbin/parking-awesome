@@ -6,7 +6,7 @@ body {
 	background:#5A5A5A;
 	text-align: center;
 	font-family: 'Cabin', arial, serif; 
-	min-height:480px;
+	min-height:420px;
 }
 
 .centerline {
@@ -79,12 +79,12 @@ body {
 	background-repeat:no-repeat;
 	height:149px;
 	width:320px;
-	top:0px;
+	top:-5px;
 	left:0;
 	right:0;
 	margin-left:auto;
 	margin-right:auto;
-	padding: 70px 0px 0px 0px;
+	padding: 65px 0px 0px 0px;
 }
 
 .icon {
@@ -92,11 +92,10 @@ body {
 	height:230px;
 	width:130px;
 	bottom:0px;
-	margin-top:auto;
-	margin-bottom:100px;
+	margin-top:-10px;
 	background-repeat:no-repeat;
 	background-position:center; 
-	visibility:hidden;
+	visibility:visible;
 }
 
 #lefticon {
