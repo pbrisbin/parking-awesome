@@ -46,10 +46,9 @@
                 var latitude  = gup('latitude');
                 var longitude = gup('longitude');
                 var heading   = gup('heading');
+                var side      = gup('side');
 
                 if (!latitude || !longitude) {
-                    // todo:
-                    alert("we /would/ ask you to give an address or present a default details page...");
                     return;
                 }
 
@@ -64,13 +63,11 @@
                 var v = new Vehicle(p);
 
                 isSnowEmergency(v, function(x) {
-                    // yes
                     var msg = "no parking due to snow emergency."
                     $("#lefttext").text(msg);
                     $("#righttext").text(msg);
                 },
                 function (y) {
-                    // no, check for other stuffs
                     $.ajax({
                         url: "parking_spots",
                         data: {
