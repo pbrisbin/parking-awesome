@@ -1,3 +1,19 @@
+ICD
+----
+
+Classes for Icons
+---
+noparking
+freeparking
+meter
+permit
+
+
+
+
+
+----
+
 Types of parking data:
 * Snow Emergency -- is one now?
 * Snow Emergency -- if so, can I park here?
