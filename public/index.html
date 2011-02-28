@@ -43,22 +43,16 @@
         }
 =======
     function updateLoc(v) {
-      isSnowEmergency(v, function(data) {
-        // is snow emergency
-        $(".lefticon").addClass("snow");
-        $(".righticon").addClass("snow");
-        $("#sidearrow").text("no can haz");
-      },
-      function(data) {
-        // is not
-        v.sideOfEvens(function(s) {
+          v.sideOfEvens(function(s) {
           var side = s ? "Right" : "Left";
 
+          // set location global
           $("#g-lat").val(v.latitude);
           $("#g-lng").val(v.longitude);
           $("#g-head").val(v.heading.toString());
           $("#g-side").val(side);
 
+          // call for parking info
           $.ajax({
             url: "parking_spots",
             data: {
@@ -68,14 +62,25 @@
               "side": side
             },
             success: function(result) {
-              $(".lefticon").addClass(result.left.flag);
-              $(".righticon").addClass(result.right.flag);
               $("#streetsign").text(result.streetname);
 
-              if (result.left.message) {
-                $("#sidearrow").text(result.left.message);
-              } else if (result.right.message) {
-                $("#sidearrow").text(result.right.message);
+              // check for snow emergency
+              isSnowEmergency(v function(data) {
+                // is snow emergency
+                $(".lefticon").addClass("snow");
+                $(".righticon").addClass("snow");
+                $("#sidearrow").text("no can haz");
+              },
+              function(data) {
+                // no snow emergency
+                $(".lefticon").addClass(result.left.flag);
+                $(".righticon").addClass(result.right.flag);
+
+                if (result.left.message) {
+                  $("#sidearrow").text(result.left.message);
+                } else if (result.right.message) {
+                  $("#sidearrow").text(result.right.message);
+                }
               }
             },
             failure: function(result) {
