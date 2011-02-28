@@ -37,7 +37,7 @@ function civicApiPoint(dataset, position, callback) {
 
 /* in a list of features, find the nearest to your source position */
 function nearestFeature(position, features) {
-    var f, p, d, c1losest;
+    var f, p, d, closest;
     var min = null;
 
     for (i in features) {
