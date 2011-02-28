@@ -98,13 +98,13 @@ body {
 	visibility:visible;
 }
 
-#lefticon {
+.lefticon {
 	background-image:url("freeparkingleft.png");
 	left:15px;
 	float:left;
 }
 
-#righticon {
+.righticon {
 	background-image:url("freeparkingright.png");
 	right:15px;
 	float:right;
