@@ -51,15 +51,13 @@ a {
 }
 
 #back {
-	position:relative;
-	top:95px;
-	margin-top:95px;
+	position: relative;
+	top:145px;
+	margin-top:145px;
 }
 
 #address{
-	position: relative;
-	top:120px;
-	margin-top:120px;
+	display:none;
 }
 
 #moreinfo {
@@ -69,9 +67,9 @@ a {
 }
 
 #streetsignpost{
-	height:300px;
-	top:0px;
-	margin-top:0px;
+	height:120px;
+top:50px;
+	margin-top:50px;
 }
 
 #signcontainer {
