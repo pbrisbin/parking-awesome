@@ -75,7 +75,7 @@ body {
 	position: relative;
 	z-index:4;
 	font-size:300%;
-	background-image:url("leftarrow.png");
+	background-image:url("rightarrow.png");
 	background-repeat:no-repeat;
 	height:149px;
 	width:320px;
@@ -85,6 +85,10 @@ body {
 	margin-left:auto;
 	margin-right:auto;
 	padding: 65px 0px 0px 0px;
+}
+
+.arrowleft {
+	background-image:url("leftarrow.png");
 }
 
 .icon {
