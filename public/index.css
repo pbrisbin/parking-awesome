@@ -8,7 +8,7 @@
 	position: absolute;
 	z-index:4;
 	font-size:300%;
-	background-image:url("arrow3.png");
+	background-image:url("leftarrow.png");
 	background-repeat:no-repeat;
 	height:200px;
 	width:320px;
@@ -92,12 +92,12 @@ body {
 	margin-bottom:100px;
 	background-repeat:no-repeat;
 	background-position:center; 
+	visibility:hidden;
 }
 
 #lefticon {
 	background-image:url("freeparkingleft.png");
 	left:15px;
-	
 }
 
 #righticon {
@@ -105,14 +105,21 @@ body {
 	right:15px;
 }
 
-.noparking {
-	background-image:url("x.png");
+.freeparking {
+	visibility:visible;
 }
 
 .meter {
+	visibility:visible;
 	background-image:url("meter.png");
 }
 
 .permit {
+	visibility:visible;
 	background-image:url("permit.png");
+}
+
+.noparking {
+	visibility:visible;
+	background-image:url("x.png");
 }
