@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang=en>
+<head>
+  <meta charset=utf-8>
+  <link href='http://fonts.googleapis.com/css?family=Cabin:bold' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <title>Why Can I Park?</title>
+  <link rel="SHORTCUT ICON" href="canpark.ico" />
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  <link href="index.css" rel=stylesheet type=text/css>
+  <link href="detail.css" rel=stylesheet type=text/css></head>
+<body>
+	<div id="left" class="side"><span id="lefttext" class="text">You can park here if you have a permit.</span></div>
+	<div id="right" class="side"><span id="righttext" class="text">You can't park here because it is a snow emergency.</span></div>
+	<div class="centerline" id="one"></div>
+	<div class="centerline" id="two"></div>
+	<div class="button" id="fineinfo"><script>$("how much might it cost?").button();</script></div>
+	<div class="button" id="newadd"><script>$("check a different address").button();</script></div>
+
+	<div id="signcontainer">
+		<span class="streetsign" id="moreinfo">About Us</span><br>
+		<span class="streetsign" id="address">Click Here to Enter a New Address</span>
+		<div id="streetsignpost"></div>
+	</div>
+</body>
+</html>

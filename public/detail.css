@@ -1,0 +1,65 @@
+@import url(http://fonts.googleapis.com/css?family=Schoolbell);
+@import url(http://fonts.googleapis.com/css?family=Cabin:bold);
+
+body {
+	font-family: 'Schoolbell', arial, serif; 
+	font-size: 2em;
+}
+
+.side {
+	width: 42%;
+	padding: 10px 10px;
+}
+
+#left {
+	float:left;
+}
+
+#right {
+	float:right;
+}
+#signcontainer {
+	height:200px;
+}
+
+.streetsign {
+	z-index:3;
+	float:none;
+	position:relative;
+	background:#093;
+	color: #FFF;
+	font-size:200%;
+	border-style:solid;
+	border-width:2px;
+	border-color:#FFF;
+	left:0px;
+	right:0px;
+	margin-left:auto;
+	margin-right:auto;
+	padding-left:10px;
+	padding-right:10px;
+	font-size:75%;
+	padding-top:10px;
+	padding-bottom:10px;
+	font-family: 'Cabin', arial, serif;
+}
+
+#moreinfo {
+	position: relative;
+	top:40px;
+}
+
+#address {
+	position: relative;
+	top:70px;
+	left:0px;
+	right:0px;
+	margin-top:70px;
+}
+
+#streetsignpost{
+	height:100%;
+}
+
+#signcontainer {
+}
