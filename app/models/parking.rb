@@ -3,7 +3,7 @@ class Parking
   validates :heading, :presence => true
   validate :address_or_lat_lon
   DIRECTIONS = {'N' => 0, 'NE' => 45, 'E' => 90, 'SE' => 135, 'S' => 180, 'SW' => 225, 'W' => 270, 'NW' => 315}
-  attr_accessor :address, :heading, :primo_response, :latitude, :longitude
+  attr_accessor :address, :heading, :primo_response, :latitude, :longitude, :evens
   
   def initialize(attributes={})
     attributes.each do |attribute, value|
@@ -16,6 +16,7 @@ class Parking
 
     end
     @primo_response = PrimoParking.results_for(address)
+    @street = StreetCleaning.new(:side_of_evens => self.evens.downcase, :street_name => self.address, :latitude => self.latitude, :longitude => self.longitude) rescue nil
   end
     
   def as_json(options={})
@@ -41,11 +42,15 @@ class Parking
   end
   
   def left
-    PrimoParking.parse_descriptor(primo_summary[:left])
+    resp = PrimoParking.parse_descriptor(primo_summary[:left])
+    resp.merge!( @street.summarize[:left]) if resp[:flag] == 'ok' && @street && @street.summarize[:left] rescue nil
+    resp
   end
   
   def right
-   PrimoParking.parse_descriptor(primo_summary[:right])
+   resp = PrimoParking.parse_descriptor(primo_summary[:right])
+   resp.merge!( @street.summarize[:right]) if resp[:flag] == 'ok' && @street && @street.summarize[:right] rescue nil
+   resp
   end
   
   # Integrate Parking Heading Information with Primo Summary

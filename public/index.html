@@ -17,6 +17,7 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
   <script type=text/javascript>
+<<<<<<< HEAD
 
     function updateLoc(v) {
       $.ajax({
@@ -40,6 +41,49 @@
         failure: function(result) {
           alert("aww, snap!");
         }
+=======
+    function updateLoc(v) {
+      isSnowEmergency(v, function(data) {
+        // is snow emergency
+        $(".lefticon").addClass("snow");
+        $(".righticon").addClass("snow");
+        $("#sidearrow").text("no can haz");
+      },
+      function(data) {
+        // is not
+        v.sideOfEvens(function(s) {
+          var side = s ? "Right" : "Left";
+
+          $("#g-lat").val(v.latitude);
+          $("#g-lng").val(v.longitude);
+          $("#g-head").val(v.heading.toString());
+          $("#g-side").val(side);
+
+          $.ajax({
+            url: "parking_spots",
+            data: {
+              "latitude": v.latitude,
+              "longitude": v.longitude,
+              "heading": v.heading.toString(),
+              "side": side
+            },
+            success: function(result) {
+              $(".lefticon").addClass(result.left.flag);
+              $(".righticon").addClass(result.right.flag);
+              $("#streetsign").text(result.streetname);
+
+              if (result.left.message) {
+                $("#sidearrow").text(result.left.message);
+              } else if (result.right.message) {
+                $("#sidearrow").text(result.right.message);
+              }
+            },
+            failure: function(result) {
+              alert("aww, snap!");
+            }
+          });
+        });
+>>>>>>> 197424967edf72f085d6816ecc3cfbafbd5fbb77
       });
     }
 
@@ -59,10 +103,6 @@
           }
           var v = new Vehicle(position);
           updateLoc(v);
-          isSnowEmergency(v, function() {
-            $(".lefticon").addClass("snow");
-            $(".righticon").addClass("snow");
-          });
         }
       });
     }
@@ -113,6 +153,13 @@
       <fieldset>
         <label name="address" for="addressInput">Geolocation failed. Please enter your address:</label>
         <input type="text" id="addressInput" class="text ui-widget-content ui-corner-all" />
+<<<<<<< HEAD
+=======
+        <input type="hidden" id="g-lat" value="" />
+        <input type="hidden" id="g-lng" value="" />
+        <input type="hidden" id="g-head" value="" />
+        <input type="hidden" id="g-side" value="" />
+>>>>>>> 197424967edf72f085d6816ecc3cfbafbd5fbb77
       </fieldset>
     </form>
   </div>
