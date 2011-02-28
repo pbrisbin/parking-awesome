@@ -1,0 +1,51 @@
+{
+  "status": "OK",
+  "results": [ {
+    "types": [ "route" ],
+    "formatted_address": "Huntington Ave, Boston, MA, USA",
+    "address_components": [ {
+      "long_name": "Huntington Ave",
+      "short_name": "Huntington Ave",
+      "types": [ "route" ]
+    }, {
+      "long_name": "Boston",
+      "short_name": "Boston",
+      "types": [ "locality", "political" ]
+    }, {
+      "long_name": "Massachusetts",
+      "short_name": "MA",
+      "types": [ "administrative_area_level_1", "political" ]
+    }, {
+      "long_name": "United States",
+      "short_name": "US",
+      "types": [ "country", "political" ]
+    } ],
+    "geometry": {
+      "location": {
+        "lat": 42.3477999,
+        "lng": -71.0806366
+      },
+      "location_type": "GEOMETRIC_CENTER",
+      "viewport": {
+        "southwest": {
+          "lat": 42.3316080,
+          "lng": -71.1195560
+        },
+        "northeast": {
+          "lat": 42.3841999,
+          "lng": -71.0745260
+        }
+      },
+      "bounds": {
+        "southwest": {
+          "lat": 42.3316080,
+          "lng": -71.1195560
+        },
+        "northeast": {
+          "lat": 42.3841999,
+          "lng": -71.0745260
+        }
+      }
+    }
+  } ]
+}

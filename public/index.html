@@ -1,12 +1,56 @@
 <!doctype html>
 <html lang=en>
 <head>
-    <meta charset=utf-8>
-    <link href='http://fonts.googleapis.com/css?family=Cabin:bold' rel='stylesheet' type='text/css'>
-    <title>Can I Park?</title>
-    <link href="index.css" rel=stylesheet type=text/css>
+  <meta charset=utf-8>
+  <link href='http://fonts.googleapis.com/css?family=Cabin:bold' rel='stylesheet' type='text/css'>
+  <title>Can I Park?</title>
+  <link href="index.css" rel=stylesheet type=text/css>
+  <script type="text/javascript" src="js/GeoLoc.js"></script>
+  <script type="text/javascript" src="js/GeoCode.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <script type=text/javascript>
+    function glSuccess(position) {
+      var heading = directionFromBearing(position.coords.heading);
+
+      $.ajax({
+        url: "parking_spots",
+        data: {
+          "latitude": position.coords.latitude,
+          "longitude": position.coords.longitude,
+          "heading": heading
+        },
+        success: function(result) {
+          $("#lefticon").addClass(result.left.icon);
+          $("#righticon").addClass(result.right.icon);
+          $("#streetsign").addClass(result.streetname)
+
+          if (result.left.message) {
+            $("#sidearrow").text(result.left.message);
+          } else if (result.right.message) {
+            $("#sidearrow").text(result.right.message);
+          }
+        },
+        failure: function(result) {
+          alert("aww, snap!");
+        }
+      })
+    }
+
+    function glUnsupported() {
+      /* return heading based on positioning */
+      return;
+    }
+
+    function glFailure() {
+      /* failboat */
+      return;
+    }
+
+    $(document).ready(getLocation(glSuccess, glUnsupported, glFailure));
+  </script>
 </head>
-<body>
+<body onload="geocode_init()">
 	<div id="sidearrow">Park Until 2:00 PM</div>
 	<div class="centerline" id="one"></div>
 	<div class="centerline" id="two"></div>
@@ -17,3 +61,4 @@
 	<div id="streetsignpost"></div>
 </body>
 </html>
+
