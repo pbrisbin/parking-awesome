@@ -9,59 +9,54 @@
   <link rel="apple-touch-icon" href="canpark.png" />
   <link rel="SHORTCUT ICON" href="canpark.ico" />
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/le-frog/jquery-ui.css" type="text/css" />
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/CivicAPI.js"></script>
   <script type="text/javascript" src="js/GeoLoc.js"></script>
   <script type="text/javascript" src="js/Vehicle.js"></script>
   <script type="text/javascript" src="js/SnowRoute.js"></script>
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
   <script type=text/javascript>
     function updateLoc(v) {
-          v.sideOfEvens(function(s) {
-          var side = s ? "Right" : "Left";
+        var side = "Right"; // dummy value for now
 
-          // set location global
-          $("#g-lat").val(v.latitude);
-          $("#g-lng").val(v.longitude);
-          $("#g-head").val(v.heading.toString());
-          $("#g-side").val(side);
+        $("#g-lat").val (v.latitude);
+        $("#g-lng").val (v.longitude);
+        $("#g-head").val(v.heading.toString());
+        $("#g-side").val(side);
 
-          // call for parking info
-          $.ajax({
+        $.ajax({
             url: "parking_spots",
             data: {
-              "latitude": v.latitude,
-              "longitude": v.longitude,
-              "heading": v.heading.toString(),
-              "side": side
+                "latitude": v.latitude,
+                "longitude": v.longitude,
+                "heading": v.heading.toString(),
+                "side": side
             },
+
             success: function(result) {
-              $("#streetsign").text(result.streetname);
+                // on all responses
+                $("#streetsign").text(result.streetname);
 
-              // check for snow emergency
-              isSnowEmergency(v, function(data) {
-                // is snow emergency
-                $(".lefticon").addClass("snow");
-                $(".righticon").addClass("snow");
-                $("#sidearrow").text("no can haz");
-              },
-              function(data) {
-                // no snow emergency
-                $(".lefticon").addClass(result.left.flag);
-                $(".righticon").addClass(result.right.flag);
-
-                if (result.left.message) {
-                  $("#sidearrow").html(result.left.message);
-                } else if (result.right.message) {
-                  $("#sidearrow").html(result.right.message);
-                }
-              });
+                isSnowEmergency(v, function(data) {
+                    // snow
+                    $(".lefticon").addClass("snow");
+                    $(".righticon").addClass("snow");
+                    $("#sidearrow").html('no parking due to snow emergency');
+                    $("#sidearrow").html('no parking due to snow emergency');
+                },
+                function(data) {
+                    // no snow
+                    $(".lefticon").addClass(result.left.flag);
+                    $(".righticon").addClass(result.right.flag);
+                    $("#sidearrow").html(result.left.message);
+                    $("#sidearrow").html(result.right.message);
+                });
             },
+
             failure: function(result) {
-              alert("aww, snap!");
+                alert("aww, snap!");
             }
-          });
         });
     }
 
@@ -103,34 +98,31 @@
       });
     }
 
-    function cbFail(message) {
-      alert(message);
-    }
+    $(function() { 
+        /* onclick handlers */
+        $(".lefticon").click(function() {
+            $("#sidearrow").removeClass("arrowright").addClass("arrowleft");
+        });
 
-    /* onclick handlers */
-    $(document).ready(function() {
-      $(".lefticon").click(function() {
-        $("#sidearrow").removeClass("arrowright").addClass("arrowleft");
-      });
+        $(".righticon").click(function() {
+            $("#sidearrow").removeClass("arrowleft").addClass("arrowright");
+        });
 
-      $(".righticon").click(function() {
-        $("#sidearrow").removeClass("arrowleft").addClass("arrowright");
-      });
+        $("#streetsign").click(function() {
+            getAddress("Please enter an address:");
+        });
 
-      $("#streetsign").click(function() {
-        getAddress("Please enter an address:");
-      });
+        $("#sidearrow").click(function() {
+            var lat = $("#g-lat").val();
+            var lng = $("#g-lng").val();
+            var head = $("#g-head").val();
+            var side = $("#g-side").val();
+            location.href = "detail.html?latitude=" + lat + "&longitude=" + lng + "&heading=" + head + "&side=" + side;
+        });
 
-      $("#sidearrow").click(function() {
-        var lat = $("#g-lat").val();
-        var lng = $("#g-lng").val();
-        var head = $("#g-head").val();
-        var side = $("#g-side").val();
-        location.href = "detail.html?latitude=" + lat + "&longitude=" + lng + "&heading=" + head + "&side=" + side;
-      });
+        /* begin page logic */
+        initVehicleFromGeoLocation(updateLoc, getAddress, getAddress); // note: user-deny is returned as error
     });
-
-    $(document).ready(initVehicleFromGeoLocation(updateLoc, getAddress, cbFail));
   </script>
 </head>
 <body>
