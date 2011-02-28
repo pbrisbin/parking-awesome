@@ -19,6 +19,7 @@ SideOfVehicle = { // {{{
 
 function oppositeSide(side) { // {{{
     if (typeof(side) == "undefined") {
+        // things default right, so opposite should default left
         return SideOfVehicle.Left;
     }
 
@@ -66,10 +67,7 @@ function initVehicleFromGeoLocation(success, error, unsupported) { // {{{
 } // }}}
 
 Vehicle.prototype.toString = function() { // {{{
-    return "{ vehicle: { " 
-        + "longitude: " + this.longitude + ", " 
-        + "latitude: "  + this.latitude + ", " 
-        + "heading: "   + this.heading.toString() + " } }";
+    return JSON.stringify(this);
 } // }}}
 
 Vehicle.prototype.sideOfVehicle = function(position) { // {{{
