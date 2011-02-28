@@ -26,4 +26,26 @@ class ParkingSpotsControllerTest < ActionController::TestCase
     assert_equal expected, ActiveSupport::JSON.decode(@response.body)
   end
   
+  def test_index_with_address
+    get :index, :address => 'Huntington Ave, Boston', :heading => 'N',:format => :json
+    assert_response :success
+
+    expected = {"left"=>{'flag'=>"no", 'message'=>"bad idea"},
+     "right"=>{'flag'=>"no", 'message'=>"bad idea"}, "streetname"=>"Huntington Ave"}
+    
+    assert_equal expected, ActiveSupport::JSON.decode(@response.body)
+  end
+
+  def test_index_without_required_fields
+    get :index, :format => :json
+    assert_response :unprocessable_entity
+
+    expected = {"errors"=>
+      {"latitude"=>"cannot be blank",
+       "heading"=>"can't be blank",
+       "longitude"=>"cannot be blank"}}
+    
+    assert_equal expected, ActiveSupport::JSON.decode(@response.body)
+    
+  end
 end
