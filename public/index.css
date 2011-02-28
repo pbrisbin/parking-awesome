@@ -96,7 +96,7 @@ body {
 	margin-bottom:100px;
 	background-repeat:no-repeat;
 	background-position:center; 
-	visibility:visible;
+	visibility:hidden;
 }
 
 #lefticon {
